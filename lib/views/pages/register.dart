@@ -26,7 +26,41 @@ class _RegisterState extends State<Register> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Spacer(),
+                      SizedBox(height: 30),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Card(
+                            elevation: 0,
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.pushAndRemoveUntil<dynamic>(
+                                  context, 
+                                  MaterialPageRoute<dynamic>(
+                                    builder: (context) => Pilihrole()
+                                  ), 
+                                  (route) => false
+                                );
+                              },
+                              child: SizedBox(
+                                width: 100,
+                                height: 50,
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(Icons.arrow_back_ios_new, size: 20),
+                                    Expanded(
+                                      child: Text("Kembali", textAlign: TextAlign.center,)
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ]
+                      ),
+                      SizedBox(height: 30),
                       Text(
                         "Salam Kenal!",
                         style: TextStyle(
@@ -43,7 +77,7 @@ class _RegisterState extends State<Register> {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 55),
+                      SizedBox(height: 45),
                       TextFormField(
                         keyboardType: TextInputType.text,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
