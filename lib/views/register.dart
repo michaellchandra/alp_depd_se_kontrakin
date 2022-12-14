@@ -1,13 +1,13 @@
 part of 'pages.dart';
 
-class Login extends StatefulWidget {
-  const Login({ Key? key }) : super(key: key);
+class Register extends StatefulWidget {
+  const Register({ Key? key }) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
   bool isHide = true;
 
   @override
@@ -28,7 +28,7 @@ class _LoginState extends State<Login> {
                     children: <Widget>[
                       Spacer(),
                       Text(
-                        "Selamat Datang",
+                        "Salam Kenal!",
                         style: TextStyle(
                           fontSize: 15, 
                         ),
@@ -36,7 +36,7 @@ class _LoginState extends State<Login> {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        "Silahkan Sign In",
+                        "Silahkan Registrasi",
                         style: TextStyle(
                           fontSize: 28, 
                           fontWeight: FontWeight.bold,
@@ -44,6 +44,18 @@ class _LoginState extends State<Login> {
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 55),
+                      TextFormField(
+                        keyboardType: TextInputType.text,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        decoration: InputDecoration(
+                          labelText: "Nama Lengkap",
+                          prefixIcon: Icon(Icons.person),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8))
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 15),
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -55,7 +67,19 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 30),
+                      SizedBox(height: 15),
+                      TextFormField(
+                        keyboardType: TextInputType.number,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        decoration: InputDecoration(
+                          labelText: "Nomor Telepon",
+                          prefixIcon: Icon(Icons.phone),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8))
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 15),
                       TextFormField(
                         obscureText: isHide,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -76,7 +100,7 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 30),
+                      SizedBox(height: 25),
                       SizedBox(
                         width: double.infinity,
                         height: 50,
@@ -95,7 +119,7 @@ class _LoginState extends State<Login> {
                                 borderRadius: BorderRadius.circular(6)
                             )
                           ),
-                          child: Text("Sign In")
+                          child: Text("Register")
                         ),
                       ),
                       SizedBox(height: 20),
@@ -104,7 +128,7 @@ class _LoginState extends State<Login> {
                           Navigator.pushAndRemoveUntil<dynamic>(
                             context, 
                             MaterialPageRoute<dynamic>(
-                              builder: (context) => Register()
+                              builder: (context) => Login()
                             ), 
                             (route) => false
                           );
@@ -116,9 +140,9 @@ class _LoginState extends State<Login> {
                               color: Colors.black
                             ),
                             children: <TextSpan>[
-                              new TextSpan(text: "Belum Punya Akun? "),
+                              new TextSpan(text: "Sudah Punya Akun? "),
                               new TextSpan(
-                                text: "Registrasi Disini", 
+                                text: "Masuk Disini", 
                                 style: TextStyle(
                                   color: Color(0xff0042C1),
                                   fontWeight: FontWeight.bold
@@ -143,8 +167,7 @@ class _LoginState extends State<Login> {
             ),
           ],
         ),
-      ),
+      )
     );
   }
 }
-
