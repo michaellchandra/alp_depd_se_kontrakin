@@ -1,4 +1,4 @@
-import 'package:alp_depd_se_kontrakin/views/pages.dart';
+import 'package:alp_depd_se_kontrakin/views/pages/pages.dart';
 import 'package:flutter/material.dart';
 
 void main() {
