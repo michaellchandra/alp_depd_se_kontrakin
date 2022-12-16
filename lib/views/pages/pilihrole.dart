@@ -74,7 +74,9 @@ class _PilihroleState extends State<Pilihrole> {
                             height: 120,
                             child: Row(
                               children: <Widget>[
+                                SizedBox(width: 16),
                                 Icon(Icons.home, size: 75),
+                                SizedBox(width: 8),
                                 Expanded(
                                   child: RichText(
                                     text: new TextSpan(
@@ -127,7 +129,9 @@ class _PilihroleState extends State<Pilihrole> {
                             height: 120,
                             child: Row(
                               children: <Widget>[
+                                SizedBox(width: 16),
                                 Icon(Icons.search, size: 75),
+                                SizedBox(width: 8),
                                 Expanded(
                                   child: RichText(
                                     text: new TextSpan(
