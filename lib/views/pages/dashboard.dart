@@ -131,7 +131,7 @@ class _DashboardState extends State<Dashboard> {
                       SizedBox(height: 12),
                       SizedBox(
                         width: 400,
-                        height: 130,
+                        height: 140,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
@@ -154,39 +154,41 @@ class _DashboardState extends State<Dashboard> {
                                           image: NetworkImage(
                                             "https://www.pngplay.com/wp-content/uploads/6/50-Off-Discount-Vector-Transparent-PNG.png"
                                           ),
-                                          fit: BoxFit.fill
+                                          fit: BoxFit.fitHeight
                                         )
                                       ),
                                     ),
-                                    // Column(
-                                    //   children: <Widget>[
-                                    //     Padding(
-                                    //       padding: EdgeInsets.all(0),
-                                    //       child: Image.network("https://www.pngplay.com/wp-content/uploads/6/50-Off-Discount-Vector-Transparent-PNG.png")
-                                    //     )
-                                    //   ],
-                                    // ),
-                                    SizedBox(height: 2),
-                                    Column(
-                                      children: <Widget>[
-                                        Text(
-                                          "Diskon Pengguna Baru!", 
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15
-                                          ),
-                                        )
+                                    SizedBox(height: 6),
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 10),
+                                        Column(
+                                          children: <Widget>[
+                                            Text(
+                                              "Diskon Pengguna Baru!", 
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 14
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ],
                                     ),
-                                    Column(
-                                      children: <Widget>[
-                                        Text(
-                                          "Promo hingga 50% loh!", 
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 12
-                                          ),
-                                        )
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 10),
+                                        Column(
+                                          children: <Widget>[
+                                            Text(
+                                              "Promo hingga 50% loh!", 
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.normal,
+                                                fontSize: 12
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ],
                                     )
                                   ],
@@ -194,22 +196,114 @@ class _DashboardState extends State<Dashboard> {
                               ),
                             ),
                             SizedBox(width: 8),
-                            Container(
-                              width: 200,
-                              color: Colors.purple[500],
-                              child: const Center(child: Text('Item 2', style: TextStyle(fontSize: 18, color: Colors.white),)),
+                            Card(
+                              elevation: 8,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16)
+                              ),
+                              child: SizedBox(
+                                width: 200,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      height: 85,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(16),
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                            "https://cdn-icons-png.flaticon.com/512/4458/4458537.png"
+                                          ),
+                                          fit: BoxFit.fitHeight
+                                        )
+                                      ),
+                                    ),
+                                    SizedBox(height: 2),
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 8),
+                                        Text(
+                                          "Undang Teman Dapat Bonus!", 
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 8),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text(
+                                            "Dapatkan voucher diskon ketika mengundang teman", 
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 12
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ),
                             ),
                             SizedBox(width: 8),
-                            Container(
-                              width: 200,
-                              color: Colors.purple[400],
-                              child: const Center(child: Text('Item 3', style: TextStyle(fontSize: 18, color: Colors.white),)),
-                            ),
-                            SizedBox(width: 8),
-                            Container(
-                              width: 200,
-                              color: Colors.purple[300],
-                              child: const Center(child: Text('Item 4', style: TextStyle(fontSize: 18, color: Colors.white),)),
+                            Card(
+                              elevation: 8,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16)
+                              ),
+                              child: SizedBox(
+                                width: 200,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      height: 85,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(16),
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                            "https://opensource.com/sites/default/files/lead-images/bug_software_issue_tracking_computer_screen.jpg"
+                                          ),
+                                          fit: BoxFit.fitHeight
+                                        )
+                                      ),
+                                    ),
+                                    SizedBox(height: 2),
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 8),
+                                        Text(
+                                          "Laporkan Bug!", 
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 8),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text(
+                                            "Bantu melaporkan bug agar aplikasi kami dapat terus berkembang", 
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 12
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ),
                             ),
                             SizedBox(width: 8),
                           ],
