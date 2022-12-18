@@ -7,6 +7,7 @@ part 'register.dart';
 part 'pilihrole.dart';
 part 'splash.dart';
 part 'dashboard.dart';
+part 'listtransaksi.dart';
 
 class BluePainter extends CustomPainter {
   @override

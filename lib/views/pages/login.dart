@@ -116,6 +116,13 @@ class _LoginState extends State<Login> {
                         height: 50,
                         child: ElevatedButton(
                           onPressed: () async {
+                            Navigator.pushAndRemoveUntil<dynamic>(
+                              context, 
+                              MaterialPageRoute<dynamic>(
+                                builder: (context) => Dashboard()
+                              ), 
+                              (route) => false
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xff0042C1),

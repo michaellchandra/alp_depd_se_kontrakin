@@ -31,7 +31,7 @@ class _DashboardState extends State<Dashboard> {
               child: Align(
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 70),
+                    SizedBox(height: 60),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,7 +72,7 @@ class _DashboardState extends State<Dashboard> {
                             Navigator.pushAndRemoveUntil<dynamic>(
                               context, 
                               MaterialPageRoute<dynamic>(
-                                builder: (context) => Login()
+                                builder: (context) => Listtransaksi()
                               ), 
                               (route) => false
                             );
