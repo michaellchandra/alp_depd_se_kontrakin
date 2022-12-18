@@ -86,7 +86,7 @@ class _ListtransaksiState extends State<Listtransaksi> {
                               child: Row(
                                 children: <Widget>[
                                   SizedBox(width: 16),
-                                  Icon(Icons.person, size: 50),
+                                  Icon(Icons.person_outline, size: 50),
                                   SizedBox(width: 16),
                                   Expanded(
                                     child: RichText(
@@ -193,7 +193,7 @@ class _ListtransaksiState extends State<Listtransaksi> {
                               child: Row(
                                 children: <Widget>[
                                   SizedBox(width: 16),
-                                  Icon(Icons.person, size: 50),
+                                  Icon(Icons.person_outline, size: 50),
                                   SizedBox(width: 16),
                                   Expanded(
                                     child: RichText(
@@ -308,7 +308,7 @@ class _ListtransaksiState extends State<Listtransaksi> {
                               child: Row(
                                 children: <Widget>[
                                   SizedBox(width: 16),
-                                  Icon(Icons.person, size: 50),
+                                  Icon(Icons.person_outline, size: 50),
                                   SizedBox(width: 16),
                                   Expanded(
                                     child: RichText(
@@ -399,7 +399,7 @@ class _ListtransaksiState extends State<Listtransaksi> {
                               child: Row(
                                 children: <Widget>[
                                   SizedBox(width: 16),
-                                  Icon(Icons.person, size: 50),
+                                  Icon(Icons.person_outline, size: 50),
                                   SizedBox(width: 16),
                                   Expanded(
                                     child: RichText(
@@ -481,7 +481,7 @@ class _ListtransaksiState extends State<Listtransaksi> {
                               child: Row(
                                 children: <Widget>[
                                   SizedBox(width: 16),
-                                  Icon(Icons.person, size: 50),
+                                  Icon(Icons.person_outline, size: 50),
                                   SizedBox(width: 16),
                                   Expanded(
                                     child: RichText(

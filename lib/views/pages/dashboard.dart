@@ -83,7 +83,7 @@ class _DashboardState extends State<Dashboard> {
                             child: Row(
                               children: <Widget>[
                                 SizedBox(width: 10),
-                                Icon(Icons.list, size: 50, color: Colors.white),
+                                Icon(Icons.document_scanner_outlined, size: 50, color: Colors.white),
                                 SizedBox(width: 10),
                                 Expanded(
                                   child: RichText(
@@ -332,7 +332,7 @@ class _DashboardState extends State<Dashboard> {
                             child: Row(
                               children: <Widget>[
                                 SizedBox(width: 16),
-                                Icon(Icons.call, size: 50),
+                                Icon(Icons.phone_outlined, size: 50),
                                 SizedBox(width: 12),
                                 Expanded(
                                   child: RichText(
@@ -387,7 +387,7 @@ class _DashboardState extends State<Dashboard> {
                             child: Row(
                               children: <Widget>[
                                 SizedBox(width: 16),
-                                Icon(Icons.share, size: 50),
+                                Icon(Icons.share_outlined, size: 50),
                                 SizedBox(width: 12),
                                 Expanded(
                                   child: RichText(
@@ -434,7 +434,7 @@ class _DashboardState extends State<Dashboard> {
         backgroundColor: Colors.grey[100],
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home_rounded),
             label: "Home"
           ),
           BottomNavigationBarItem(
@@ -442,7 +442,7 @@ class _DashboardState extends State<Dashboard> {
             label: "Browse"
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.person_outline),
             label: "Profile"
           )
         ],

@@ -83,7 +83,7 @@ class _RegisterState extends State<Register> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           labelText: "Nama Lengkap",
-                          prefixIcon: Icon(Icons.person),
+                          prefixIcon: Icon(Icons.person_outline),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8))
                           ),
@@ -95,7 +95,7 @@ class _RegisterState extends State<Register> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           labelText: "Email",
-                          prefixIcon: Icon(Icons.mail),
+                          prefixIcon: Icon(Icons.mail_outline),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8))
                           ),
@@ -107,7 +107,7 @@ class _RegisterState extends State<Register> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           labelText: "Nomor Telepon",
-                          prefixIcon: Icon(Icons.phone),
+                          prefixIcon: Icon(Icons.phone_outlined),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8))
                           ),
@@ -119,7 +119,7 @@ class _RegisterState extends State<Register> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           labelText: "Password",
-                          prefixIcon: Icon(Icons.lock),
+                          prefixIcon: Icon(Icons.lock_outline),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8))
                           ),

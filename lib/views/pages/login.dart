@@ -83,7 +83,7 @@ class _LoginState extends State<Login> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           labelText: "Email",
-                          prefixIcon: Icon(Icons.mail),
+                          prefixIcon: Icon(Icons.mail_outline),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8))
                           ),
@@ -95,7 +95,7 @@ class _LoginState extends State<Login> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           labelText: "Password",
-                          prefixIcon: Icon(Icons.lock),
+                          prefixIcon: Icon(Icons.lock_outline),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8))
                           ),

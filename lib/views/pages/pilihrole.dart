@@ -75,7 +75,7 @@ class _PilihroleState extends State<Pilihrole> {
                             child: Row(
                               children: <Widget>[
                                 SizedBox(width: 16),
-                                Icon(Icons.home, size: 75),
+                                Icon(Icons.home_outlined, size: 75),
                                 SizedBox(width: 8),
                                 Expanded(
                                   child: RichText(

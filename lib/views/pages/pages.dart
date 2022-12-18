@@ -8,6 +8,7 @@ part 'pilihrole.dart';
 part 'splash.dart';
 part 'dashboard.dart';
 part 'listtransaksi.dart';
+part 'profile.dart';
 
 class BluePainter extends CustomPainter {
   @override
@@ -207,6 +208,51 @@ class BluePainter4 extends CustomPainter {
 
     paint.color = const Color(0xff0042C1).withOpacity(0.3);
     canvas.drawPath(ovalPath4, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return oldDelegate != this;
+  }
+}
+
+class BluePainter5 extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final height = size.height;
+    final width = size.width;
+    Paint paint = Paint();
+
+    Path mainBackground = Path();
+    mainBackground.addRect(Rect.fromLTRB(0, 0, width, height));
+    paint.color = Colors.white;
+    canvas.drawPath(mainBackground, paint);
+
+    Path ovalPath = Path();
+
+    ovalPath.moveTo(0, height * 0.92);
+
+    ovalPath.quadraticBezierTo(width * 0.47, height * 0.91, width * 0.5, height);
+    
+    ovalPath.lineTo(0, height);
+
+    ovalPath.close();
+
+    paint.color = const Color(0xff0042C1);
+    canvas.drawPath(ovalPath, paint);
+
+    Path ovalPath2 = Path();
+
+    ovalPath2.moveTo(width * 0.7, 0);
+
+    ovalPath2.quadraticBezierTo(width * 0.7, height * 0.15, width, height * 0.15);
+    
+    ovalPath2.lineTo(width, 0);
+
+    ovalPath2.close();
+
+    paint.color = const Color(0xff0042C1).withOpacity(0.3);
+    canvas.drawPath(ovalPath2, paint);
   }
 
   @override
