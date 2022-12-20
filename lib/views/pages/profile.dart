@@ -16,10 +16,9 @@ class _ProfileState extends State<Profile> {
         child: Container(
           width: double.infinity,
           height: double.infinity,
-          padding: EdgeInsets.all(24),
+          padding: EdgeInsets.fromLTRB(24, 80, 24, 30),
           child: Column(
             children: <Widget>[
-              SizedBox(height: 60),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -99,7 +98,7 @@ class _ProfileState extends State<Profile> {
                     Navigator.pushAndRemoveUntil<dynamic>(
                       context, 
                       MaterialPageRoute<dynamic>(
-                        builder: (context) => Login()
+                        builder: (context) => Managekontrakan()
                       ), 
                       (route) => false
                     );
@@ -186,42 +185,6 @@ class _ProfileState extends State<Profile> {
                     textAlign: TextAlign.left,
                   ),
                 ],
-              ),
-              SizedBox(height: 8),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                elevation: 4,
-                child: InkWell(
-                  splashColor: Colors.blue.withAlpha(30),
-                  onTap: () {
-                    Navigator.pushAndRemoveUntil<dynamic>(
-                      context, 
-                      MaterialPageRoute<dynamic>(
-                        builder: (context) => Login()
-                      ), 
-                      (route) => false
-                    );
-                  },
-                  child: SizedBox(
-                    width: 400,
-                    height: 65,
-                    child: Row(
-                      children: <Widget>[
-                        SizedBox(width: 16),
-                        Icon(Icons.settings, size: 40),
-                        SizedBox(width: 16),
-                        Text(
-                          "Customer Service",
-                          style: TextStyle(
-                            fontSize: 18,
-                          )
-                        )
-                      ],
-                    ),
-                  ),
-                ),
               ),
               SizedBox(height: 8),
               Card(
