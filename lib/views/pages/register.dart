@@ -9,10 +9,23 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   bool isHide = true;
+  bool _isLoading = false;
+  final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  String name = '', email = '', password = '';
+
+
+  _showMsg(msg) {
+    final snackBar = SnackBar(
+      content: Text(msg),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: CustomPaint(
         painter: BluePainter(),
         child: Stack(
@@ -88,6 +101,13 @@ class _RegisterState extends State<Register> {
                             borderRadius: BorderRadius.all(Radius.circular(8))
                           ),
                         ),
+                        validator: (nameValue){
+                            if(nameValue!.isEmpty){
+                              return 'Please enter your full name';
+                            }
+                            name = nameValue;
+                            return null;
+                          }
                       ),
                       SizedBox(height: 15),
                       TextFormField(
@@ -100,6 +120,13 @@ class _RegisterState extends State<Register> {
                             borderRadius: BorderRadius.all(Radius.circular(8))
                           ),
                         ),
+                        validator: (emailValue){
+                            if(emailValue!.isEmpty){
+                              return 'Please enter your email';
+                            }
+                            email = emailValue;
+                            return null;
+                          }
                       ),
                       SizedBox(height: 15),
                       TextFormField(
@@ -133,6 +160,13 @@ class _RegisterState extends State<Register> {
                                 isHide ? Icons.visibility : Icons.visibility_off),
                           ),
                         ),
+                        validator: (passwordValue){
+                            if(passwordValue!.isEmpty){
+                              return 'Please enter your password';
+                            }
+                            password = passwordValue;
+                            return null;
+                          }
                       ),
                       SizedBox(height: 25),
                       SizedBox(
@@ -203,5 +237,44 @@ class _RegisterState extends State<Register> {
         ),
       )
     );
+  }
+
+  void _register() async{
+    setState(() {
+      _isLoading = true;
+    });
+    var data = {
+      'name' : name,
+      'email' : email,
+      'password' : password
+    };
+
+    var res = await Network().auth(data, '/register');
+    var body = json.decode(res.body);
+    if(body['success']){
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      localStorage.setString('token', json.encode(body['token']));
+      localStorage.setString('user', json.encode(body['user']));
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Dashboard()
+          ),
+      );
+    }else{
+      if(body['message']['name'] != null){
+        _showMsg(body['message']['name'][0].toString());
+      }
+      else if(body['message']['email'] != null){
+        _showMsg(body['message']['email'][0].toString());
+      }
+      else if(body['message']['password'] != null){
+        _showMsg(body['message']['password'][0].toString());
+      }
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
   }
 }

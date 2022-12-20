@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 part 'login.dart';
 part 'register.dart';
@@ -9,6 +13,7 @@ part 'splash.dart';
 part 'dashboard.dart';
 part 'listtransaksi.dart';
 part 'profile.dart';
+part '../network/api.dart';
 
 class BluePainter extends CustomPainter {
   @override

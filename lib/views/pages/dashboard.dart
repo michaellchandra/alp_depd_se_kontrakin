@@ -10,12 +10,30 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
 
   int _currentIndex = 0;
+  String name='';
 
   final screens = [
     Dashboard(),
     Login(),
     Register()
   ];
+
+  @override
+  void initState(){
+    super.initState();
+    _loadUserData();
+  }
+
+  _loadUserData() async{
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var user = jsonDecode(localStorage.getString('user')!);
+
+    if(user != null) {
+      setState(() {
+        name = user['name'];
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +68,7 @@ class _DashboardState extends State<Dashboard> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "Selyandaru!",
+                          '${name}',
                           style: TextStyle(
                             fontSize: 28, 
                             fontWeight: FontWeight.bold,

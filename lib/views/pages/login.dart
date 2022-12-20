@@ -9,10 +9,24 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool isHide = true;
+  bool _isLoading = false;
+  final _formKey = GlobalKey<FormState>();
+  var email, password;
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+
+  _showMsg(msg) {
+    final snackBar = SnackBar(
+      content: Text(msg),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: CustomPaint(
         painter: BluePainter(),
         child: Stack(
@@ -88,6 +102,13 @@ class _LoginState extends State<Login> {
                             borderRadius: BorderRadius.all(Radius.circular(8))
                           ),
                         ),
+                        validator: (emailValue){
+                            if(emailValue!.isEmpty){
+                              return 'Please enter your email';
+                            }
+                            email = emailValue;
+                            return null;
+                          }
                       ),
                       SizedBox(height: 30),
                       TextFormField(
@@ -109,20 +130,30 @@ class _LoginState extends State<Login> {
                                 isHide ? Icons.visibility : Icons.visibility_off),
                           ),
                         ),
+                        validator: (passwordValue){
+                            if(passwordValue!.isEmpty){
+                              return 'Please enter your password';
+                            }
+                            password = passwordValue;
+                            return null;
+                          }
                       ),
                       SizedBox(height: 30),
                       SizedBox(
                         width: double.infinity,
                         height: 50,
                         child: ElevatedButton(
-                          onPressed: () async {
-                            Navigator.pushAndRemoveUntil<dynamic>(
-                              context, 
-                              MaterialPageRoute<dynamic>(
-                                builder: (context) => Dashboard()
-                              ), 
-                              (route) => false
-                            );
+                          onPressed: () {
+                            if (_formKey.currentState?.validate()??true) {
+                              _login();
+                            }
+                            // Navigator.pushAndRemoveUntil<dynamic>(
+                            //   context, 
+                            //   MaterialPageRoute<dynamic>(
+                            //     builder: (context) => Dashboard()
+                            //   ), 
+                            //   (route) => false
+                            // );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xff0042C1),
@@ -186,6 +217,36 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  void _login() async{
+    setState(() {
+      _isLoading = true;
+    });
+    var data = {
+      'email' : email,
+      'password' : password
+    };
+
+    var res = await Network().auth(data, '/login');
+    var body = json.decode(res.body);
+    if(body['success']){
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      localStorage.setString('token', json.encode(body['token']));
+      localStorage.setString('user', json.encode(body['user']));
+      Navigator.pushReplacement(
+          context,
+          new MaterialPageRoute(
+              builder: (context) => Dashboard()
+          ),
+      );
+    }else{
+      _showMsg(body['message']);
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
   }
 }
 
