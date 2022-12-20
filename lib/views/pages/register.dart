@@ -173,7 +173,10 @@ class _RegisterState extends State<Register> {
                         width: double.infinity,
                         height: 50,
                         child: ElevatedButton(
-                          onPressed: () async {
+                          onPressed: () {
+                            if (_formKey.currentState?.validate()??true) {
+                              _register();
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xff0042C1),

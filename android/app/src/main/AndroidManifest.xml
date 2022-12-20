@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.alp_depd_se_kontrakin">
-   <application
+    <application
         android:label="alp_depd_se_kontrakin"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

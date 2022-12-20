@@ -437,6 +437,32 @@ class _DashboardState extends State<Dashboard> {
                           ),
                         ),
                       ),
+
+                      //LOGOUT SEMENTARA HAPUS AJA KALAU PERLU
+                      SizedBox(
+                        width: double.infinity,
+                        height: 30,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            logout();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff0042C1),
+                            elevation: 0,
+                            textStyle: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold
+                            ),
+                            padding: EdgeInsets.fromLTRB(24, 10, 24, 10),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6)
+                            )
+                          ),
+                          child: Text("LOGOUT SEMENTARA")
+                        ),
+                      ),
+                      
+                      //SAMPAI SINI
                       
                   ],
                 )
@@ -471,5 +497,18 @@ class _DashboardState extends State<Dashboard> {
         },
       ),
     );
+  }
+
+  void logout() async{
+    var res = await Network().getData('/logout');
+    var body = json.decode(res.body);
+    if(body['success']){
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      localStorage.remove('user');
+      localStorage.remove('token');
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context)=>Login()));
+    }
   }
 }
