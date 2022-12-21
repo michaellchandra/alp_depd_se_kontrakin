@@ -1,13 +1,13 @@
 part of 'pages.dart';
 
-class Tambahkontrakan extends StatefulWidget {
-  const Tambahkontrakan({ Key? key }) : super(key: key);
+class Editkontrakan extends StatefulWidget {
+  const Editkontrakan({ Key? key }) : super(key: key);
 
   @override
-  _TambahkontrakanState createState() => _TambahkontrakanState();
+  _EditkontrakanState createState() => _EditkontrakanState();
 }
 
-class _TambahkontrakanState extends State<Tambahkontrakan> {
+class _EditkontrakanState extends State<Editkontrakan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +39,7 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                     ),
                     SizedBox(width: 16),
                     Text(
-                      "Tambah Kontrakan",
+                      "Edit Kontrakan",
                       style: TextStyle(
                         fontSize: 28, 
                         fontWeight: FontWeight.bold,
@@ -317,7 +317,7 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                         borderRadius: BorderRadius.circular(6)
                       )
                     ),
-                    child: Text("SUBMIT")
+                    child: Text("SIMPAN PERUBAHAN")
                   )
                 )
               ],

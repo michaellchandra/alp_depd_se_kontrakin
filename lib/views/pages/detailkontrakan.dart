@@ -393,7 +393,13 @@ class _DetailkontrakanState extends State<Detailkontrakan> {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
-
+                      Navigator.pushAndRemoveUntil<dynamic>(
+                        context, 
+                        MaterialPageRoute<dynamic>(
+                          builder: (context) => Editkontrakan()
+                        ), 
+                        (route) => false
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange.shade900,
@@ -415,7 +421,7 @@ class _DetailkontrakanState extends State<Detailkontrakan> {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
-
+                      Future.delayed(Duration.zero, () => showAlert(context));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red.shade900,
@@ -438,4 +444,101 @@ class _DetailkontrakanState extends State<Detailkontrakan> {
       )
     );
   }
+}
+
+void showAlert(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+        content: Container(
+          width: 450,
+          height: 200,
+          padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Apakah Anda Yakin?",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: Text(
+                      "Anda akan menghapus kontrakan ini, setelah dihapus kontrakan tidak dapat dikembalikan",
+                      textAlign: TextAlign.center,
+                    )
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(width: 1),
+                  SizedBox(
+                    width: 110,
+                    height: 30,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xff0042C1),
+                        elevation: 0,
+                        textStyle: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6)
+                        )
+                      ),
+                      child: Text("KEMBALI")
+                    )
+                  ),
+                  SizedBox(
+                    width: 110,
+                    height: 30,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil<dynamic>(
+                          context, 
+                          MaterialPageRoute<dynamic>(
+                            builder: (context) => Managekontrakan()
+                          ), 
+                          (route) => false
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red.shade900,
+                        elevation: 0,
+                        textStyle: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6)
+                        )
+                      ),
+                      child: Text("SAYA YAKIN")
+                    )
+                  ),
+                  SizedBox(width: 1),
+                ],
+              )
+            ],
+          )
+        ),
+      )
+    );
 }

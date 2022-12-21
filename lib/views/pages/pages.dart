@@ -16,6 +16,8 @@ part 'profile.dart';
 part 'managekontrakan.dart';
 part 'detailkontrakan.dart';
 part 'tambahkontrakan.dart';
+part 'editkontrakan.dart';
+part 'tab_navigator.dart';
 part '../network/api.dart';
 
 class BluePainter extends CustomPainter {

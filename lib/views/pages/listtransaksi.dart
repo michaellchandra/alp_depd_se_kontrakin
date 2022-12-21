@@ -18,60 +18,52 @@ class _ListtransaksiState extends State<Listtransaksi> {
             Container(
               width: double.infinity,
               height: double.infinity,
-              padding: EdgeInsets.fromLTRB(24, 24, 24, 100),
+              padding: EdgeInsets.fromLTRB(24, 80, 24, 120),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(height: 40),
                     Row(
                       children: <Widget>[
-                        Card(
-                          elevation: 0,
-                          color: Colors.transparent,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pushAndRemoveUntil<dynamic>(
-                                context, 
-                                MaterialPageRoute<dynamic>(
-                                  builder: (context) => Dashboard()
-                                ), 
-                                (route) => false
-                              );
-                            },
-                            child: SizedBox(
-                              width: 100,
-                              height: 50,
-                              child: Row(
-                                children: <Widget>[
-                                  Icon(Icons.arrow_back_ios_new, size: 20),
-                                  Expanded(
-                                    child: Text("Kembali", textAlign: TextAlign.center,)
-                                  )
-                                ],
-                              ),
-                            ),
+                        new GestureDetector(
+                          onTap: () {
+                            Navigator.pushAndRemoveUntil<dynamic>(
+                              context, 
+                              MaterialPageRoute<dynamic>(
+                                builder: (context) => Dashboard()
+                              ), 
+                              (route) => false
+                            );
+                          },
+                          child: SizedBox(
+                            height: 50,
+                            child: Icon(Icons.arrow_back_ios_new, size: 20)
                           ),
                         ),
-                      ]
-                    ),
-                    SizedBox(height: 30),
-                    Column(
-                      children: [
+                        SizedBox(width: 16),
                         Text(
                           "List Transaksi",
                           style: TextStyle(
                             fontSize: 28, 
                             fontWeight: FontWeight.bold,
                           ),
+                          textAlign: TextAlign.left,
                         ),
-                        SizedBox(height: 30),
-                        Text(
-                          "Pending",
-                          style: TextStyle(
-                            fontSize: 18, 
-                            fontWeight: FontWeight.bold,
+                      ],
+                    ),
+                    SizedBox(height: 15),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
+                          child: Text(
+                            "Pending",
+                            style: TextStyle(
+                              fontSize: 18, 
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         SizedBox(height: 8),
@@ -289,11 +281,14 @@ class _ListtransaksiState extends State<Listtransaksi> {
                             )
                         ),
                         SizedBox(height: 24),
-                        Text(
-                          "On Going",
-                          style: TextStyle(
-                            fontSize: 18, 
-                            fontWeight: FontWeight.bold,
+                        Container(
+                          padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
+                          child: Text(
+                            "On Going",
+                            style: TextStyle(
+                              fontSize: 18, 
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         SizedBox(height: 8),
@@ -380,11 +375,14 @@ class _ListtransaksiState extends State<Listtransaksi> {
                             )
                         ),
                         SizedBox(height: 24),
-                        Text(
-                          "Finished",
-                          style: TextStyle(
-                            fontSize: 18, 
-                            fontWeight: FontWeight.bold,
+                        Container(
+                          padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
+                          child: Text(
+                            "Finished",
+                            style: TextStyle(
+                              fontSize: 18, 
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         SizedBox(height: 8),
