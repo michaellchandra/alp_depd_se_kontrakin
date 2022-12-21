@@ -1,7 +1,7 @@
 part of '../pages/pages.dart';
 
 class Network{
-  final String _url = 'http://10.0.2.2:8000/api/v1';
+  final String _url = 'https://kontrakin.imtstack.com/api/v1';
   // 192.168.1.2 is my IP, change with your IP address
   var token;
 

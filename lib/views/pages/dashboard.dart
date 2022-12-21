@@ -11,21 +11,21 @@ class _DashboardState extends State<Dashboard> {
   String name = '';
 
   @override
-  // void initState(){
-  //   super.initState();
-  //   _loadUserData();
-  // }
+  void initState(){
+    super.initState();
+    _loadUserData();
+  }
 
-  // _loadUserData() async{
-  //   SharedPreferences localStorage = await SharedPreferences.getInstance();
-  //   var user = jsonDecode(localStorage.getString('user')!);
+  _loadUserData() async{
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var user = jsonDecode(localStorage.getString('user')!);
 
-  //   if(user != null) {
-  //     setState(() {
-  //       name = user['name'];
-  //     });
-  //   }
-  // }
+    if(user != null) {
+      setState(() {
+        name = user['name'];
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class _DashboardState extends State<Dashboard> {
               Container(
                   width: double.infinity,
                   height: double.infinity,
-                  padding: EdgeInsets.fromLTRB(24, 40, 24, 0),
+                  padding: EdgeInsets.fromLTRB(24, 80, 24, 120),
                   child: Align(
                       child: SingleChildScrollView(
                     child: Column(
@@ -76,7 +76,7 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 15),
+                        SizedBox(height: 8),
                         Card(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -449,28 +449,28 @@ class _DashboardState extends State<Dashboard> {
                         ),
 
                         //LOGOUT SEMENTARA HAPUS AJA KALAU PERLU
-                        // SizedBox(
-                        //   width: double.infinity,
-                        //   height: 30,
-                        //   child: ElevatedButton(
-                        //     onPressed: () {
-                        //       logout();
-                        //     },
-                        //     style: ElevatedButton.styleFrom(
-                        //       backgroundColor: const Color(0xff0042C1),
-                        //       elevation: 0,
-                        //       textStyle: TextStyle(
-                        //         fontSize: 12,
-                        //         fontWeight: FontWeight.bold
-                        //       ),
-                        //       padding: EdgeInsets.fromLTRB(24, 10, 24, 10),
-                        //       shape: RoundedRectangleBorder(
-                        //           borderRadius: BorderRadius.circular(6)
-                        //       )
-                        //     ),
-                        //     child: Text("LOGOUT SEMENTARA")
-                        //   ),
-                        // ),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 30,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              logout();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xff0042C1),
+                              elevation: 0,
+                              textStyle: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold
+                              ),
+                              padding: EdgeInsets.fromLTRB(24, 10, 24, 10),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6)
+                              )
+                            ),
+                            child: Text("LOGOUT SEMENTARA")
+                          ),
+                        ),
 
                         //SAMPAI SINI
                       ],
@@ -488,6 +488,7 @@ class _DashboardState extends State<Dashboard> {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
       localStorage.remove('user');
       localStorage.remove('token');
+      localStorage.remove('role');
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => Login()));
     }

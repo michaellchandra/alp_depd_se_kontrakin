@@ -14,7 +14,7 @@ class _SplashState extends State<Splash> {
     super.initState();
     Future.delayed(Duration(seconds: 3)).then((value) {
       Navigator.of(context).pushReplacement(
-        CupertinoPageRoute(builder: (ctx) => const Pilihrole())
+        CupertinoPageRoute(builder: (ctx) => CheckAuth())
       );
     });
   }
@@ -54,3 +54,4 @@ class _SplashState extends State<Splash> {
     );
   }
 }
+

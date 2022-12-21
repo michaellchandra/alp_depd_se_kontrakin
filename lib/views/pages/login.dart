@@ -144,14 +144,14 @@ class _LoginState extends State<Login> {
                           height: 50,
                           child: ElevatedButton(
                               onPressed: () {
-                                // if (_formKey.currentState?.validate()??true) {
-                                //   _login();
-                                // }
-                                Navigator.pushAndRemoveUntil<dynamic>(
-                                    context,
-                                    MaterialPageRoute<dynamic>(
-                                        builder: (context) => Botnav(index: 0)),
-                                    (route) => false);
+                                if (_formKey.currentState?.validate()??true) {
+                                  _login();
+                                }
+                                // Navigator.pushAndRemoveUntil<dynamic>(
+                                //     context,
+                                //     MaterialPageRoute<dynamic>(
+                                //         builder: (context) => Botnav(index: 0)),
+                                //     (route) => false);
                               },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xff0042C1),
@@ -216,9 +216,10 @@ class _LoginState extends State<Login> {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
       localStorage.setString('token', json.encode(body['token']));
       localStorage.setString('user', json.encode(body['user']));
+      localStorage.setString('role', json.encode(body['role']));
       Navigator.pushReplacement(
         context,
-        new MaterialPageRoute(builder: (context) => Dashboard()),
+        new MaterialPageRoute(builder: (context) => Botnav(index: 0)),
       );
     } else {
       _showMsg(body['message']);
