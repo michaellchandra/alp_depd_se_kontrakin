@@ -22,13 +22,16 @@ class _ProfileState extends State<Profile> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    "Profile",
-                    style: TextStyle(
-                      fontSize: 28, 
-                      fontWeight: FontWeight.bold,
+                  Container(
+                    padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
+                    child: Text(
+                      "Profile",
+                      style: TextStyle(
+                        fontSize: 28, 
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.left,
                     ),
-                    textAlign: TextAlign.left,
                   ),
                 ],
               ),
@@ -76,13 +79,16 @@ class _ProfileState extends State<Profile> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    "Kontrakan",
-                    style: TextStyle(
-                      fontSize: 20, 
-                      fontWeight: FontWeight.bold,
+                  Container(
+                    padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
+                    child: Text(
+                      "Kontrakan",
+                      style: TextStyle(
+                        fontSize: 20, 
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.left,
                     ),
-                    textAlign: TextAlign.left,
                   ),
                 ],
               ),
@@ -126,13 +132,16 @@ class _ProfileState extends State<Profile> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    "Dukungan & Bantuan",
-                    style: TextStyle(
-                      fontSize: 20, 
-                      fontWeight: FontWeight.bold,
+                  Container(
+                    padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
+                    child: Text(
+                      "Dukungan & Bantuan",
+                      style: TextStyle(
+                        fontSize: 20, 
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.left,
                     ),
-                    textAlign: TextAlign.left,
                   ),
                 ],
               ),
@@ -176,13 +185,16 @@ class _ProfileState extends State<Profile> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    "Lainnya",
-                    style: TextStyle(
-                      fontSize: 20, 
-                      fontWeight: FontWeight.bold,
+                  Container(
+                    padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
+                    child: Text(
+                      "Lainnya",
+                      style: TextStyle(
+                        fontSize: 20, 
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.left,
                     ),
-                    textAlign: TextAlign.left,
                   ),
                 ],
               ),

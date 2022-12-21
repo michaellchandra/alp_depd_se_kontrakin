@@ -26,6 +26,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
       body: CustomPaint(
         painter: BluePainter(),
@@ -144,16 +145,16 @@ class _LoginState extends State<Login> {
                         height: 50,
                         child: ElevatedButton(
                           onPressed: () {
-                            if (_formKey.currentState?.validate()??true) {
-                              _login();
-                            }
-                            // Navigator.pushAndRemoveUntil<dynamic>(
-                            //   context, 
-                            //   MaterialPageRoute<dynamic>(
-                            //     builder: (context) => Dashboard()
-                            //   ), 
-                            //   (route) => false
-                            // );
+                            // if (_formKey.currentState?.validate()??true) {
+                            //   _login();
+                            // }
+                            Navigator.pushAndRemoveUntil<dynamic>(
+                              context, 
+                              MaterialPageRoute<dynamic>(
+                                builder: (context) => Botnav(index: 0)
+                              ), 
+                              (route) => false
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xff0042C1),

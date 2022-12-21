@@ -9,40 +9,24 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
 
-  // int index = 0;
   String name='';
 
-  // final screens = [
-  //   Dashboard(),
-  //   Login(),
-  //   Profile()
-  // ];
-
-  // String currentPage = "";
-  // int currentIndex = 0;
-  // List<String> pageKeys = ["Dashboard", "Login", "Profile"];
-  // Map<String, GlobalKey<NavigatorState>> _navigatorKeys = {
-  //   "Dashboard": GlobalKey<NavigatorState>(),
-  //   "Login": GlobalKey<NavigatorState>(),
-  //   "Profile": GlobalKey<NavigatorState>(),
-  // };
-
   @override
-  void initState(){
-    super.initState();
-    _loadUserData();
-  }
+  // void initState(){
+  //   super.initState();
+  //   _loadUserData();
+  // }
 
-  _loadUserData() async{
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    var user = jsonDecode(localStorage.getString('user')!);
+  // _loadUserData() async{
+  //   SharedPreferences localStorage = await SharedPreferences.getInstance();
+  //   var user = jsonDecode(localStorage.getString('user')!);
 
-    if(user != null) {
-      setState(() {
-        name = user['name'];
-      });
-    }
-  }
+  //   if(user != null) {
+  //     setState(() {
+  //       name = user['name'];
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -490,62 +474,6 @@ class _DashboardState extends State<Dashboard> {
           ],
         )
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   selectedItemColor: Color(0xff0042C1),
-      //   unselectedItemColor: Colors.grey.withOpacity(0.8),
-      //   currentIndex: currentIndex,
-      //   backgroundColor: Colors.grey[100],
-      //   items: [
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.home_rounded),
-      //       label: "Home"
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.search),
-      //       label: "Browse"
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.person_outline),
-      //       label: "Profile"
-      //     )
-      //   ],
-      //   onTap: (int index) {
-      //     setState((){
-      //       _selectTab(pageKeys[index], index);
-      //     });
-      //   },
-      // ),
-      // bottomNavigationBar: NavigationBarTheme(
-      //   data: NavigationBarThemeData(
-      //     indicatorColor: Colors.blue.shade100,
-      //     labelTextStyle: MaterialStateProperty.all(
-      //       TextStyle(
-      //         fontSize: 14,
-      //         fontWeight: FontWeight.w500
-      //       )
-      //     )
-      //   ),
-      //   child: NavigationBar(
-      //     height: 60,
-      //     selectedIndex: index,
-      //     onDestinationSelected: (index) =>
-      //       setState(() => this.index = index),
-      //     destinations: [
-      //       NavigationDestination(
-      //         icon: Icon(Icons.home_rounded),
-      //         label: "Home"
-      //       ),
-      //       NavigationDestination(
-      //         icon: Icon(Icons.search),
-      //         label: "Browse"
-      //       ),
-      //       NavigationDestination(
-      //         icon: Icon(Icons.person_outline),
-      //         label: "Profile"
-      //       ),
-      //     ],
-      //   )
-      // ),
     );
   }
 
@@ -561,11 +489,4 @@ class _DashboardState extends State<Dashboard> {
           MaterialPageRoute(builder: (context)=>Login()));
     }
   }
-
-  // void _selectTab(String tabItem, int index) {
-  //   setState(() {
-  //     _currentTab = pageKeys[index];
-  //     _selectedIndex = index;
-  //   });
-  // }
 }

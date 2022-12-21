@@ -27,7 +27,7 @@ class _ManagekontrakanState extends State<Managekontrakan> {
                         Navigator.pushAndRemoveUntil<dynamic>(
                           context, 
                           MaterialPageRoute<dynamic>(
-                            builder: (context) => Profile()
+                            builder: (context) => Botnav(index: 2)
                           ), 
                           (route) => false
                         );
