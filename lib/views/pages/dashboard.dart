@@ -11,16 +11,16 @@ class _DashboardState extends State<Dashboard> {
   String name = '';
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     _loadUserData();
   }
 
-  _loadUserData() async{
+  _loadUserData() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     var user = jsonDecode(localStorage.getString('user')!);
 
-    if(user != null) {
+    if (user != null) {
       setState(() {
         name = user['name'];
       });
@@ -453,23 +453,19 @@ class _DashboardState extends State<Dashboard> {
                           width: double.infinity,
                           height: 30,
                           child: ElevatedButton(
-                            onPressed: () {
-                              logout();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff0042C1),
-                              elevation: 0,
-                              textStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold
-                              ),
-                              padding: EdgeInsets.fromLTRB(24, 10, 24, 10),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6)
-                              )
-                            ),
-                            child: Text("LOGOUT SEMENTARA")
-                          ),
+                              onPressed: () {
+                                logout();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xff0042C1),
+                                  elevation: 0,
+                                  textStyle: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                  padding: EdgeInsets.fromLTRB(24, 10, 24, 10),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(6))),
+                              child: Text("LOGOUT SEMENTARA")),
                         ),
 
                         //SAMPAI SINI

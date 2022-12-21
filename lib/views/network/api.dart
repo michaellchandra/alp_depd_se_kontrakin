@@ -1,25 +1,22 @@
 part of '../pages/pages.dart';
 
-class Network{
+class Network {
   final String _url = 'https://kontrakin.imtstack.com/api/v1';
   // 192.168.1.2 is my IP, change with your IP address
   var token;
 
-  _getToken() async{
+  _getToken() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    token = jsonDecode(localStorage.getString('token')!)['token'] ;
+    token = jsonDecode(localStorage.getString('token')!)['token'];
   }
 
-  auth(data, apiURL) async{
+  auth(data, apiURL) async {
     var fullUrl = _url + apiURL;
-    return await http.post(
-      Uri.parse(fullUrl),
-      body: jsonEncode(data),
-      headers: _setHeaders()
-    );
+    return await http.post(Uri.parse(fullUrl),
+        body: jsonEncode(data), headers: _setHeaders());
   }
 
-  getData(apiURL) async{
+  getData(apiURL) async {
     var fullUrl = _url + apiURL;
     await _getToken();
     return await http.get(
@@ -29,8 +26,8 @@ class Network{
   }
 
   _setHeaders() => {
-    'Content-type': 'application/json',
-    'Accept': 'application/json',
-    'Authorization': 'Bearer $token',
-  };
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      };
 }

@@ -26,7 +26,7 @@ class _DetailkontrakanState extends State<Detailkontrakan> {
                             Navigator.pushAndRemoveUntil<dynamic>(
                                 context,
                                 MaterialPageRoute<dynamic>(
-                                    builder: (context) => Managekontrakan()),
+                                    builder: (context) => Dashboard()),
                                 (route) => false);
                           },
                           child: SizedBox(
@@ -401,7 +401,7 @@ void showAlert(BuildContext context) {
                                       context,
                                       MaterialPageRoute<dynamic>(
                                           builder: (context) =>
-                                              Managekontrakan()),
+                                              Dashboard()),
                                       (route) => false);
                                 },
                                 style: ElevatedButton.styleFrom(

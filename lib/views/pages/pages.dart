@@ -1,9 +1,12 @@
 import 'dart:convert';
 
+import 'package:alp_depd_se_kontrakin/models/kontrakan.dart';
+import 'package:alp_depd_se_kontrakin/views/network/kontrakanservice.dart';
 import 'package:alp_depd_se_kontrakin/views/pages/checkauth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:lazy_loading_list/lazy_loading_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -39,7 +42,7 @@ class BluePainter extends CustomPainter {
     ovalPath.moveTo(0, height * 0.9);
 
     ovalPath.quadraticBezierTo(width * 0.2, height * 0.9, width * 0.3, height);
-    
+
     ovalPath.lineTo(0, height);
 
     ovalPath.close();
@@ -51,8 +54,9 @@ class BluePainter extends CustomPainter {
 
     ovalPath2.moveTo(width * 0.7, 0);
 
-    ovalPath2.quadraticBezierTo(width * 0.7, height * 0.15, width, height * 0.15);
-    
+    ovalPath2.quadraticBezierTo(
+        width * 0.7, height * 0.15, width, height * 0.15);
+
     ovalPath2.lineTo(width, 0);
 
     ovalPath2.close();
@@ -84,7 +88,7 @@ class BluePainter2 extends CustomPainter {
     ovalPath.moveTo(0, height * 0.8);
 
     ovalPath.quadraticBezierTo(width * 0.5, height * 0.7, width * 0.7, height);
-    
+
     ovalPath.lineTo(0, height);
 
     ovalPath.close();
@@ -96,8 +100,9 @@ class BluePainter2 extends CustomPainter {
 
     ovalPath2.moveTo(width * 0.5, 0);
 
-    ovalPath2.quadraticBezierTo(width * 0.5, height * 0.25, width, height * 0.23);
-    
+    ovalPath2.quadraticBezierTo(
+        width * 0.5, height * 0.25, width, height * 0.23);
+
     ovalPath2.lineTo(width, 0);
 
     ovalPath2.close();
@@ -129,7 +134,7 @@ class BluePainter3 extends CustomPainter {
     ovalPath.moveTo(0, height * 0.8);
 
     ovalPath.quadraticBezierTo(width * 0.25, height * 0.9, width * 0.3, height);
-    
+
     ovalPath.lineTo(0, height);
 
     ovalPath.close();
@@ -141,8 +146,9 @@ class BluePainter3 extends CustomPainter {
 
     ovalPath2.moveTo(width * 0.65, 0);
 
-    ovalPath2.quadraticBezierTo(width * 0.7, height * 0.15, width, height * 0.15);
-    
+    ovalPath2.quadraticBezierTo(
+        width * 0.7, height * 0.15, width, height * 0.15);
+
     ovalPath2.lineTo(width, 0);
 
     ovalPath2.close();
@@ -155,7 +161,7 @@ class BluePainter3 extends CustomPainter {
     ovalPath3.moveTo(width * 0.3, 0);
 
     ovalPath3.quadraticBezierTo(width * 0.3, height * 0.15, 0, height * 0.15);
-    
+
     ovalPath3.lineTo(0, 0);
 
     ovalPath3.close();
@@ -168,7 +174,7 @@ class BluePainter3 extends CustomPainter {
     ovalPath4.moveTo(width * 0.8, height);
 
     ovalPath4.quadraticBezierTo(width * 0.8, height * 0.9, width, height * 0.9);
-    
+
     ovalPath4.lineTo(width, height);
 
     ovalPath4.close();
@@ -200,7 +206,7 @@ class BluePainter4 extends CustomPainter {
     ovalPath3.moveTo(width * 0.2, 0);
 
     ovalPath3.quadraticBezierTo(width * 0.2, height * 0.1, 0, height * 0.1);
-    
+
     ovalPath3.lineTo(0, 0);
 
     ovalPath3.close();
@@ -212,8 +218,9 @@ class BluePainter4 extends CustomPainter {
 
     ovalPath4.moveTo(width * 0.7, height);
 
-    ovalPath4.quadraticBezierTo(width * 0.7, height * 0.85, width, height * 0.85);
-    
+    ovalPath4.quadraticBezierTo(
+        width * 0.7, height * 0.85, width, height * 0.85);
+
     ovalPath4.lineTo(width, height);
 
     ovalPath4.close();
@@ -244,8 +251,9 @@ class BluePainter5 extends CustomPainter {
 
     ovalPath.moveTo(0, height * 0.92);
 
-    ovalPath.quadraticBezierTo(width * 0.47, height * 0.91, width * 0.5, height);
-    
+    ovalPath.quadraticBezierTo(
+        width * 0.47, height * 0.91, width * 0.5, height);
+
     ovalPath.lineTo(0, height);
 
     ovalPath.close();
@@ -257,8 +265,9 @@ class BluePainter5 extends CustomPainter {
 
     ovalPath2.moveTo(width * 0.7, 0);
 
-    ovalPath2.quadraticBezierTo(width * 0.7, height * 0.15, width, height * 0.15);
-    
+    ovalPath2.quadraticBezierTo(
+        width * 0.7, height * 0.15, width, height * 0.15);
+
     ovalPath2.lineTo(width, 0);
 
     ovalPath2.close();
