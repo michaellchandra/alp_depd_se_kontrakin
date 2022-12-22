@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 class Kontrakan extends Equatable {
   final int? id;
   final int? userId;
+  final String? address;
   final String? city;
   final String? province;
   final int? pricePerYear;
@@ -14,6 +15,7 @@ class Kontrakan extends Equatable {
   const Kontrakan({
     this.id,
     this.userId,
+    this.address,
     this.city,
     this.province,
     this.pricePerYear,
@@ -26,6 +28,7 @@ class Kontrakan extends Equatable {
   factory Kontrakan.fromJson(Map<String, dynamic> json) => Kontrakan(
         id: json['id'] as int?,
         userId: json['UserID'] as int?,
+        address: json['Address'] as String?,
         city: json['City'] as String?,
         province: json['Province'] as String?,
         pricePerYear: json['Price_per_year'] as int?,
@@ -42,6 +45,7 @@ class Kontrakan extends Equatable {
   Map<String, dynamic> toJson() => {
         'id': id,
         'UserID': userId,
+        'Address': address,
         'City': city,
         'Province': province,
         'Price_per_year': pricePerYear,
@@ -59,6 +63,7 @@ class Kontrakan extends Equatable {
     return [
       id,
       userId,
+      address,
       city,
       province,
       pricePerYear,

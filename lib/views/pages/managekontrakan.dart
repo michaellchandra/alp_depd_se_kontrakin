@@ -89,7 +89,10 @@ class _ManagekontrakanState extends State<Managekontrakan> {
                               elevation: 8,
                               child: InkWell(
                                 splashColor: Colors.blue.withAlpha(30),
-                                onTap: (() {}),
+                                onTap: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => Detailkontrakan(listKontrakan[index])));
+                                },
                                 child: SizedBox(
                                   width: 400,
                                   height: 100,
@@ -169,7 +172,7 @@ class _ManagekontrakanState extends State<Managekontrakan> {
                       Navigator.push(
                         context, 
                         MaterialPageRoute(
-                          builder: (context) => Tambahkontrakan()
+                          builder: (context) => Tambahkontrakan(userid: id)
                         )
                       );
                     },

@@ -1,15 +1,24 @@
 part of 'pages.dart';
 
 class Tambahkontrakan extends StatefulWidget {
-  const Tambahkontrakan({Key? key}) : super(key: key);
+  var userid;
+  Tambahkontrakan({super.key, required this.userid});
 
   @override
   _TambahkontrakanState createState() => _TambahkontrakanState();
 }
 
 class _TambahkontrakanState extends State<Tambahkontrakan> {
+  var id;
+
+  @override
+    void initState() {
+      super.initState();
+      id = widget.userid;
+  }
 
   XFile? image;
+  var selectedImage;
 
   final ImagePicker picker = ImagePicker();
 
@@ -18,12 +27,16 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
 
     setState((() {
       image = img;
+      selectedImage = File(img!.path);
     }));
   }
 
   final _keyState = GlobalKey<FormState>();
+  var address, city, province, price, desc;
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   TextEditingController cityController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
   TextEditingController provinceController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController descController = TextEditingController();
@@ -77,6 +90,7 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: CustomPaint(
+            key: _scaffoldKey,
             painter: BluePainter4(),
             child: Container(
               width: double.infinity,
@@ -124,7 +138,11 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                                 controller: provinceController,
                                 autovalidateMode: AutovalidateMode.onUserInteraction,
                                 validator: ((value) {
-                                  return value!.isEmpty ? "Province must not be empty" : null;
+                                  if (value!.isEmpty) {
+                                    return 'Please enter your province';
+                                  }
+                                  province = value;
+                                  return null;
                                 }),
                                 decoration: InputDecoration(
                                   fillColor: Colors.white,
@@ -151,7 +169,11 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                                 controller: cityController,
                                 autovalidateMode: AutovalidateMode.onUserInteraction,
                                 validator: ((value) {
-                                  return value!.isEmpty ? "City must not be empty" : null;
+                                  if (value!.isEmpty) {
+                                    return 'Please enter your city';
+                                  }
+                                  city = value;
+                                  return null;
                                 }),
                                 decoration: InputDecoration(
                                   fillColor: Colors.white,
@@ -175,10 +197,45 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                                 )]
                               ),
                               child: TextFormField(
+                                controller: addressController,
+                                autovalidateMode: AutovalidateMode.onUserInteraction,
+                                validator: ((value) {
+                                  if (value!.isEmpty) {
+                                    return 'Please enter your address';
+                                  }
+                                  address = value;
+                                  return null;
+                                }),
+                                decoration: InputDecoration(
+                                  fillColor: Colors.white,
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.black)
+                                  ),
+                                  labelText: "Address",
+                                  // labelStyle: TextStyle(
+                                  //   color: 
+                                  // )
+
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                boxShadow: [BoxShadow(
+                                  color: Colors.white,
+                                  blurRadius: 2.0,
+                                  spreadRadius: 0.4
+                                )]
+                              ),
+                              child: TextFormField(
                                 controller: priceController,
                                 autovalidateMode: AutovalidateMode.onUserInteraction,
                                 validator: ((value) {
-                                  return value!.isEmpty ? "Price must not be empty" : null;
+                                  if (value!.isEmpty) {
+                                    return 'Please enter your price';
+                                  }
+                                  price = value;
+                                  return null;
                                 }),
                                 decoration: InputDecoration(
                                   fillColor: Colors.white,
@@ -205,7 +262,11 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                                 controller: descController,
                                 autovalidateMode: AutovalidateMode.onUserInteraction,
                                 validator: ((value) {
-                                  return value!.isEmpty ? "Description must not be empty" : null;
+                                  if (value!.isEmpty) {
+                                    return 'Please enter your description';
+                                  }
+                                  desc = value;
+                                  return null;
                                 }),
                                 decoration: InputDecoration(
                                   fillColor: Colors.white,
@@ -273,7 +334,9 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                               height: 50,
                               child: ElevatedButton(
                                 onPressed: (() {
-                                  
+                                  if (_keyState.currentState?.validate() ?? true) {
+                                    _addKontrakan();
+                                  }
                                 }),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Color(0xff0042C1),
@@ -289,7 +352,7 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                                 child: Text("Add"),
                               )
                             )
-                          ] ,
+                        ] ,
                         )
                       ),
                     )
@@ -299,5 +362,11 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
             )
         )
     );
+  }
+  void _addKontrakan() async {
+
+    KontrakanService.addKontrakan(Kontrakan(address: address, city: city, province: province, pricePerYear: int.parse(price), description: desc, userId: id), selectedImage);
+    Navigator.pop(context) ;
+
   }
 }
