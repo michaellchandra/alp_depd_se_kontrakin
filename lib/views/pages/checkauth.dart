@@ -25,7 +25,7 @@ class _CheckAuthState extends State<CheckAuth> {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     var token = localStorage.getString('token');
     var role = localStorage.getString('role');
-    var user = jsonDecode(localStorage.getString('user')!);
+    var user = jsonDecode(localStorage.getString('user')??"");
     if (token != null && role != null) {
       if (mounted) {
         setState(() {
@@ -44,7 +44,7 @@ class _CheckAuthState extends State<CheckAuth> {
     Widget child;
     if (isAuth && isPenyewa) {
       child = Botnav(
-        index: 0,
+        index: 0
       );
     } else if (isAuth && isPenyewa == false) {
       child = Profile(id: userId,);

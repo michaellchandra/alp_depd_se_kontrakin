@@ -115,7 +115,7 @@ class _EditkontrakanState extends State<Editkontrakan> {var id;
                         ),
                         SizedBox(width: 25,),
                         Text(
-                          "Tambah Kontrakan",
+                          "Edit Kontrakan",
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,

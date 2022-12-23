@@ -59,9 +59,17 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                       Navigator.pop(context);
                       getImage(ImageSource.gallery);
                     },
+                    style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xff0042C1),
+                                elevation: 0,
+                                textStyle: TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.bold),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6))),
                     child: Row(
                       children: [
                         Icon(Icons.image),
+                        SizedBox(width: 16),
                         Text('From Gallery'),
                       ],
                     ),
@@ -72,9 +80,17 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                       Navigator.pop(context);
                       getImage(ImageSource.camera);
                     },
+                    style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xff0042C1),
+                                elevation: 0,
+                                textStyle: TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.bold),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6))),
                     child: Row(
                       children: [
                         Icon(Icons.camera),
+                        SizedBox(width: 16),
                         Text('From Camera'),
                       ],
                     ),
@@ -126,37 +142,37 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                         key: _keyState,
                         child: Column(
                           children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                boxShadow: [BoxShadow(
-                                  color: Colors.white,
-                                  blurRadius: 2.0,
-                                  spreadRadius: 0.4
-                                )]
-                              ),
-                              child: TextFormField(
-                                controller: provinceController,
-                                autovalidateMode: AutovalidateMode.onUserInteraction,
-                                validator: ((value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter your province';
-                                  }
-                                  province = value;
-                                  return null;
-                                }),
-                                decoration: InputDecoration(
-                                  fillColor: Colors.white,
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.black)
-                                  ),
-                                  labelText: "Province",
-                                  // labelStyle: TextStyle(
-                                  //   color: 
-                                  // )
+                              Container(
+                                decoration: BoxDecoration(
+                                  boxShadow: [BoxShadow(
+                                    color: Colors.white,
+                                    blurRadius: 2.0,
+                                    spreadRadius: 0.4
+                                  )]
+                                ),
+                                child: TextFormField(
+                                  controller: provinceController,
+                                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                                  validator: ((value) {
+                                    if (value!.isEmpty) {
+                                      return 'Please enter your province';
+                                    }
+                                    province = value;
+                                    return null;
+                                  }),
+                                  decoration: InputDecoration(
+                                    fillColor: Colors.white,
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.black)
+                                    ),
+                                    labelText: "Province",
+                                    // labelStyle: TextStyle(
+                                    //   color: 
+                                    // )
 
+                                  ),
                                 ),
                               ),
-                            ),
                             Container(
                               decoration: BoxDecoration(
                                 boxShadow: [BoxShadow(
@@ -281,7 +297,7 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 8,),
+                            SizedBox(height: 16,),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -306,8 +322,10 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                                         label: Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text("Upload Foto",
-                                            style: TextStyle(color: Colors.grey),),
-                                        )),
+                                            style: TextStyle(color: Colors.grey),
+                                          ),
+                                        )
+                                      ),
                                     ),
                                   ),
                                 )
@@ -327,8 +345,16 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                                   ),
                                 ),
                               )
-                            : Text("No Image"),
-                            SizedBox(height: 16),
+                            : Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
+                                    child: Text("No Image")
+                                  ),
+                                ],
+                              ),
+                            SizedBox(height: 24),
                             SizedBox(
                               width: double.infinity,
                               height: 50,
@@ -349,7 +375,7 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                                     borderRadius: BorderRadius.circular(6)
                                   )
                                 ),
-                                child: Text("Add"),
+                                child: Text("SUBMIT"),
                               )
                             )
                         ] ,

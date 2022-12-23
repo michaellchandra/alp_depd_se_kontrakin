@@ -22,7 +22,7 @@ class _DetailkontrakanState extends State<Detailkontrakan> {
             child: Container(
                 width: double.infinity,
                 height: double.infinity,
-                padding: EdgeInsets.fromLTRB(24, 80, 24, 0),
+                padding: EdgeInsets.fromLTRB(24, 80, 24, 120),
                 child: SingleChildScrollView(
                   child: Column(children: <Widget>[
                     Row(
@@ -209,7 +209,8 @@ class _DetailkontrakanState extends State<Detailkontrakan> {
                         child: ElevatedButton(
                             onPressed: () {
                               Future.delayed(
-                                  Duration.zero, () => showAlert(context));
+                                Duration.zero, () => showAlert(context)
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.red.shade900,
@@ -219,7 +220,6 @@ class _DetailkontrakanState extends State<Detailkontrakan> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(6))),
                             child: Text("HAPUS KONTRAKAN"))),
-                    SizedBox(height: 50),
                   ]),
                 ))));
   }

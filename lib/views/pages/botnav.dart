@@ -17,7 +17,10 @@ class _BotnavState extends State<Botnav> {
     super.initState();
   }
 
-  final tabs = [Dashboard(), Center(child: Text("Browse"))];
+  final tabs = [
+    Dashboard(), 
+    Center(child: Text("Browse"))
+  ];
 
   @override
   Widget build(BuildContext context) {
