@@ -73,7 +73,7 @@ class _RiwayattransaksiState extends State<Riwayattransaksi> {
                       Navigator.pushAndRemoveUntil<dynamic>(
                         context,
                         MaterialPageRoute<dynamic>(
-                          builder: (context) => Detailtransaksi()
+                          builder: (context) => Detailtransaksipenyewa()
                         ),
                         (route) => false
                       );
@@ -177,7 +177,7 @@ class _RiwayattransaksiState extends State<Riwayattransaksi> {
                       Navigator.pushAndRemoveUntil<dynamic>(
                         context,
                         MaterialPageRoute<dynamic>(
-                          builder: (context) => Detailtransaksi()
+                          builder: (context) => Detailtransaksipenyewa()
                         ),
                         (route) => false
                       );

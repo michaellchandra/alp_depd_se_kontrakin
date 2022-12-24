@@ -47,7 +47,6 @@ class _DashboardState extends State<Dashboard> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Container(
-                              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                               padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
                               child: Text(
                                 "Selamat Datang",
@@ -81,7 +80,6 @@ class _DashboardState extends State<Dashboard> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                           elevation: 8,
                           color: Color(0xff0042C1),
                           child: InkWell(
@@ -134,7 +132,6 @@ class _DashboardState extends State<Dashboard> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Container(
-                              margin: EdgeInsets.fromLTRB(0, 12, 0, 0),
                               padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
                               child: Text("Informasi Terkini",
                                   style: TextStyle(
@@ -357,7 +354,7 @@ class _DashboardState extends State<Dashboard> {
                               padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
                               child: SizedBox(
                                 width: 400,
-                                height: 120,
+                                height: 100,
                                 child: Row(
                                   children: <Widget>[
                                     SizedBox(width: 16),
@@ -412,7 +409,7 @@ class _DashboardState extends State<Dashboard> {
                               padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
                               child: SizedBox(
                                 width: 400,
-                                height: 120,
+                                height: 100,
                                 child: Row(
                                   children: <Widget>[
                                     SizedBox(width: 16),

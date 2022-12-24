@@ -1,13 +1,13 @@
 part of '../pages/pages.dart';
 
-class Detailwishlistkontrakan extends StatefulWidget {
-  const Detailwishlistkontrakan({ Key? key }) : super(key: key);
+class Detailkontrakanpenyewa extends StatefulWidget {
+  const Detailkontrakanpenyewa({ Key? key }) : super(key: key);
 
   @override
-  _DetailwishlistkontrakanState createState() => _DetailwishlistkontrakanState();
+  _DetailkontrakanpenyewaState createState() => _DetailkontrakanpenyewaState();
 }
 
-class _DetailwishlistkontrakanState extends State<Detailwishlistkontrakan> {
+class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +27,7 @@ class _DetailwishlistkontrakanState extends State<Detailwishlistkontrakan> {
                         Navigator.pushAndRemoveUntil<dynamic>(
                           context, 
                           MaterialPageRoute<dynamic>(
-                            builder: (context) => Wishlistkontrakan()
+                            builder: (context) => Carikontrakanpenyewa()
                           ), 
                           (route) => false
                         );
@@ -382,11 +382,11 @@ class _DetailwishlistkontrakanState extends State<Detailwishlistkontrakan> {
                   height: 50,
                   child: ElevatedButton.icon(
                     onPressed: () {
-                      print("HAPUS DARI WISHLIST TAPPED");
+                      print("MASUKKAN KE WISHLIST TAPPED");
                     },
                     icon: Icon(Icons.favorite_outline),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey,
+                      backgroundColor: Color(0xff8000FF),
                       elevation: 0,
                       textStyle: TextStyle(
                         fontSize: 14,
@@ -396,7 +396,7 @@ class _DetailwishlistkontrakanState extends State<Detailwishlistkontrakan> {
                         borderRadius: BorderRadius.circular(6)
                       )
                     ),
-                    label: Text("HAPUS DARI WISHLIST")
+                    label: Text("MASUKKAN KE WISHLIST")
                   )
                 ),
                 SizedBox(height: 16),

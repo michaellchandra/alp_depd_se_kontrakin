@@ -19,7 +19,7 @@ class _BotnavState extends State<Botnav> {
 
   final tabs = [
     Dashboard(), 
-    Center(child: Text("Browse"))
+    Carikontrakan()
   ];
 
   @override

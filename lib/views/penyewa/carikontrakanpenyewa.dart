@@ -1,13 +1,13 @@
-part of 'pages.dart';
+part of '../pages/pages.dart';
 
-class Carikontrakan extends StatefulWidget {
-  const Carikontrakan({ Key? key }) : super(key: key);
+class Carikontrakanpenyewa extends StatefulWidget {
+  const Carikontrakanpenyewa({ Key? key }) : super(key: key);
 
   @override
-  _CarikontrakanState createState() => _CarikontrakanState();
+  _CarikontrakanpenyewaState createState() => _CarikontrakanpenyewaState();
 }
 
-class _CarikontrakanState extends State<Carikontrakan> {
+class _CarikontrakanpenyewaState extends State<Carikontrakanpenyewa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -147,7 +147,14 @@ class _CarikontrakanState extends State<Carikontrakan> {
                       child: InkWell(
                         splashColor: Colors.blue.withAlpha(30),
                         onTap: () {
-                          print("card tapped");
+                          Navigator.pushAndRemoveUntil<dynamic>(
+                            context,
+                            MaterialPageRoute<dynamic>(
+                              builder: (context) =>
+                              Detailkontrakanpenyewa()
+                            ),
+                            (route) => false
+                          );
                         },
                         child: SizedBox(
                           height: 255,
@@ -260,7 +267,14 @@ class _CarikontrakanState extends State<Carikontrakan> {
                       child: InkWell(
                         splashColor: Colors.blue.withAlpha(30),
                         onTap: () {
-                          print("card tapped");
+                          Navigator.pushAndRemoveUntil<dynamic>(
+                            context,
+                            MaterialPageRoute<dynamic>(
+                              builder: (context) =>
+                              Detailkontrakanpenyewa()
+                            ),
+                            (route) => false
+                          );
                         },
                         child: SizedBox(
                           height: 255,
@@ -373,7 +387,14 @@ class _CarikontrakanState extends State<Carikontrakan> {
                       child: InkWell(
                         splashColor: Colors.blue.withAlpha(30),
                         onTap: () {
-                          print("card tapped");
+                          Navigator.pushAndRemoveUntil<dynamic>(
+                            context,
+                            MaterialPageRoute<dynamic>(
+                              builder: (context) =>
+                              Detailkontrakanpenyewa()
+                            ),
+                            (route) => false
+                          );
                         },
                         child: SizedBox(
                           height: 255,

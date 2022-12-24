@@ -1,13 +1,13 @@
 part of '../pages/pages.dart';
 
-class Detailtransaksi extends StatefulWidget {
-  const Detailtransaksi({ Key? key }) : super(key: key);
+class Detailtransaksipenyewa extends StatefulWidget {
+  const Detailtransaksipenyewa({ Key? key }) : super(key: key);
 
   @override
-  _DetailtransaksiState createState() => _DetailtransaksiState();
+  _DetailtransaksipenyewaState createState() => _DetailtransaksipenyewaState();
 }
 
-class _DetailtransaksiState extends State<Detailtransaksi> {
+class _DetailtransaksipenyewaState extends State<Detailtransaksipenyewa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

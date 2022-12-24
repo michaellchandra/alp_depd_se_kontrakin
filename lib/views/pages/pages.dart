@@ -30,7 +30,9 @@ part '../penyewa/dashboardpenyewa.dart';
 part '../penyewa/profilepenyewa.dart';
 part '../penyewa/wishlistkontrakan.dart';
 part '../penyewa/riwayattransaksi.dart';
-part '../penyewa/detailtransaksi.dart';
+part '../penyewa/detailtransaksipenyewa.dart';
+part '../penyewa/detailkontrakanpenyewa.dart';
+part '../penyewa/carikontrakanpenyewa.dart';
 part '../penyewa/detailwishlistkontrakan.dart';
 part '../network/api.dart';
 
