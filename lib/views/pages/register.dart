@@ -12,7 +12,7 @@ class _RegisterState extends State<Register> {
   bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  String name = '', email = '', password = '';
+  String name = '', email = '', password = '', phone = '';
 
   _showMsg(msg) {
     final snackBar = SnackBar(
@@ -140,7 +140,13 @@ class _RegisterState extends State<Register> {
                               border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(8))),
-                            ),
+                            ),validator: (phoneValue) {
+                                if (phoneValue!.isEmpty) {
+                                  return 'Please enter your email';
+                                }
+                                phone = phoneValue;
+                                return null;
+                              },
                           ),
                           SizedBox(height: 15),
                           TextFormField(
@@ -238,7 +244,7 @@ class _RegisterState extends State<Register> {
     setState(() {
       _isLoading = true;
     });
-    var data = {'name': name, 'email': email, 'password': password};
+    var data = {'name': name, 'email': email, 'phone': phone, 'password': password, 'role': 'owner'};
 
     var res = await Network().auth(data, '/register');
     var body = json.decode(res.body);
@@ -258,6 +264,8 @@ class _RegisterState extends State<Register> {
         _showMsg(body['message']['email'][0].toString());
       } else if (body['message']['password'] != null) {
         _showMsg(body['message']['password'][0].toString());
+      }else if (body['message']['phone'] != null) {
+        _showMsg(body['message']['phone'][0].toString());
       }
     }
 
