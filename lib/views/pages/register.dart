@@ -249,7 +249,7 @@ class _RegisterState extends State<Register> {
       localStorage.setString('role', json.encode(body['role']));
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Dashboard()),
+        MaterialPageRoute(builder: (context) => Botnav(index: 0, userID: body['user']['id'],)),
       );
     } else {
       if (body['message']['name'] != null) {

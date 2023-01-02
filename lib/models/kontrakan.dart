@@ -9,6 +9,10 @@ class Kontrakan extends Equatable {
   final int? pricePerYear;
   final String? image;
   final String? description;
+  final int? active;
+  final int? minimumRent;
+  final String? phone;
+  final String? lessorName;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
@@ -21,6 +25,10 @@ class Kontrakan extends Equatable {
     this.pricePerYear,
     this.image,
     this.description,
+    this.active,
+    this.minimumRent,
+    this.lessorName,
+    this.phone,
     this.createdAt,
     this.updatedAt,
   });
@@ -34,6 +42,10 @@ class Kontrakan extends Equatable {
         pricePerYear: json['Price_per_year'] as int?,
         image: json['Image'] as String?,
         description: json['Description'] as String?,
+        active: json['Active'] as int?,
+        minimumRent: json['MinimumRent'] as int?,
+        lessorName: json['name'] as String?,
+        phone: json['phone'] as String?,
         createdAt: json['created_at'] == null
             ? null
             : DateTime.parse(json['created_at'] as String),
@@ -51,6 +63,10 @@ class Kontrakan extends Equatable {
         'Price_per_year': pricePerYear,
         'Image': image,
         'Description': description,
+        'Active': active,
+        'MinimumRent': minimumRent,
+        'name': lessorName,
+        'phone': phone,
         'created_at': createdAt?.toIso8601String(),
         'updated_at': updatedAt?.toIso8601String(),
       };
@@ -69,6 +85,10 @@ class Kontrakan extends Equatable {
       pricePerYear,
       image,
       description,
+      active,
+      minimumRent,
+      lessorName,
+      phone,
       createdAt,
       updatedAt,
     ];

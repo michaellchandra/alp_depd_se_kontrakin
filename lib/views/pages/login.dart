@@ -219,7 +219,7 @@ class _LoginState extends State<Login> {
       localStorage.setString('role', json.encode(body['role']));
       Navigator.pushReplacement(
         context,
-        new MaterialPageRoute(builder: (context) => Botnav(index: 0)),
+        new MaterialPageRoute(builder: (context) => Botnav(index: 0, userID: body['user']['id'],)),
       );
     } else {
       _showMsg(body['message']);

@@ -2,6 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:alp_depd_se_kontrakin/models/kontrakan.dart';
+import 'package:alp_depd_se_kontrakin/models/province.dart';
+import 'package:alp_depd_se_kontrakin/models/city.dart';
+import 'package:alp_depd_se_kontrakin/models/transaksi.dart';
+import 'package:alp_depd_se_kontrakin/models/transaksidetails.dart';
 import 'package:alp_depd_se_kontrakin/views/network/kontrakanservice.dart';
 import 'package:alp_depd_se_kontrakin/views/pages/checkauth.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,7 +15,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:lazy_loading_list/lazy_loading_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 import 'dart:async';
+
+import '../network/transaksiservice.dart';
+import '../network/cityservice.dart';
+import '../widgets/uiloading.dart';
 
 part 'login.dart';
 part 'register.dart';
@@ -26,6 +35,7 @@ part 'detailkontrakan.dart';
 part 'tambahkontrakan.dart';
 part 'editkontrakan.dart';
 part 'botnav.dart';
+part 'detailtransaksi.dart';
 part '../penyewa/dashboardpenyewa.dart';
 part '../penyewa/profilepenyewa.dart';
 part '../penyewa/wishlistkontrakan.dart';

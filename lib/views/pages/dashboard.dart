@@ -1,7 +1,8 @@
 part of 'pages.dart';
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+  var lessorID;
+  Dashboard( {this.lessorID, Key? key}) : super(key: key);
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -9,11 +10,13 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   String name = '';
+  var lessorID;
 
   @override
   void initState() {
     super.initState();
     _loadUserData();
+    lessorID = widget.lessorID;
   }
 
   _loadUserData() async {
@@ -88,7 +91,7 @@ class _DashboardState extends State<Dashboard> {
                               Navigator.pushAndRemoveUntil<dynamic>(
                                   context,
                                   MaterialPageRoute<dynamic>(
-                                      builder: (context) => Listtransaksi()),
+                                      builder: (context) => Listtransaksi(lessorID: lessorID,)),
                                   (route) => false);
                             },
                             child: SizedBox(

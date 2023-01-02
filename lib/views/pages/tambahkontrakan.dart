@@ -11,11 +11,7 @@ class Tambahkontrakan extends StatefulWidget {
 class _TambahkontrakanState extends State<Tambahkontrakan> {
   var id;
 
-  @override
-    void initState() {
-      super.initState();
-      id = widget.userid;
-  }
+  
 
   XFile? image;
   var selectedImage;
@@ -30,9 +26,34 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
       selectedImage = File(img!.path);
     }));
   }
+  dynamic provData;
+  dynamic provID;
+  dynamic selectedProv;
+  bool isProvSelected = false;
+  Future<List<Province>> getProvince() async{
+    dynamic listProvince;
+    await CityService.getProvince().then((value) {
+      setState(() {
+        listProvince = value;
+      });
+    });
+    return listProvince;
+  }
+
+  dynamic cityData;
+  dynamic selectedCity;
+  Future<List<City>> getCity(dynamic provId) async{
+    dynamic listCity;
+    await CityService.getCity(provID).then((value) {
+      setState(() {
+        listCity = value;
+      });
+    });
+    return listCity;
+  }
 
   final _keyState = GlobalKey<FormState>();
-  var address, city, province, price, desc;
+  var address, city, province, price, desc, minimumRent;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   TextEditingController cityController = TextEditingController();
@@ -40,6 +61,13 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
   TextEditingController provinceController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController descController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    id = widget.userid;
+    provData = getProvince();
+  }
 
   void myAlert() {
     showDialog(
@@ -142,6 +170,7 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                         key: _keyState,
                         child: Column(
                           children: [
+                              SizedBox(height: 16,),
                               Container(
                                 decoration: BoxDecoration(
                                   boxShadow: [BoxShadow(
@@ -150,29 +179,69 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                                     spreadRadius: 0.4
                                   )]
                                 ),
-                                child: TextFormField(
-                                  controller: provinceController,
-                                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                                  validator: ((value) {
-                                    if (value!.isEmpty) {
-                                      return 'Please enter your province';
-                                    }
-                                    province = value;
-                                    return null;
-                                  }),
-                                  decoration: InputDecoration(
-                                    fillColor: Colors.white,
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.black)
-                                    ),
-                                    labelText: "Province",
-                                    // labelStyle: TextStyle(
-                                    //   color: 
-                                    // )
+                                child: FutureBuilder<List<Province>>(
+                                future: provData,
+                                builder: (context, snapshot){
+                                  if(snapshot.hasData){
+                                    return DropdownButton(
+                                      isExpanded: true,
+                                      value: selectedProv,
+                                      icon: Icon(Icons.arrow_drop_down),
+                                      iconSize: 30,
+                                      elevation: 16,
+                                      style: TextStyle(color: Colors.black),
+                                      hint: selectedProv == null
+                                      ? Text('Pilih provinsi')
+                                      : Text(selectedProv.provinceName),
+                                      items: snapshot.data!.map<DropdownMenuItem<Province>>(
+                                        (Province value){
+                                          return DropdownMenuItem(
+                                            value: value,
+                                            child: Text(value.provinceName.toString())
+                                          );
+                                        }
+                                      ).toList(),
+                                      onChanged: (newValue){
+                                        setState(() {
+                                          selectedProv = newValue;
+                                          provID = selectedProv.id;
+                                          isProvSelected = true;
+                                        });
+                                        selectedCity = null;
+                                        cityData = getCity(provID);
 
-                                  ),
-                                ),
+                                      }
+                                    );
+                                  }else if(snapshot.hasError){
+                                    return Text("Tidak ada data.");
+                                  }
+                                  return UiLoading.loadingDD();
+                                }
                               ),
+                                // TextFormField(
+                                //   controller: provinceController,
+                                //   autovalidateMode: AutovalidateMode.onUserInteraction,
+                                //   validator: ((value) {
+                                //     if (value!.isEmpty) {
+                                //       return 'Please enter your province';
+                                //     }
+                                //     province = value;
+                                //     return null;
+                                //   }),
+                                //   decoration: InputDecoration(
+                                //     fillColor: Colors.white,
+                                //     enabledBorder: UnderlineInputBorder(
+                                //       borderSide: BorderSide(color: Colors.black)
+                                //     ),
+                                //     labelText: "Province",
+                                //     // labelStyle: TextStyle(
+                                //     //   color: 
+                                //     // )
+
+                                //   ),
+                                // ),
+                              ),
+                            SizedBox(height: 16,),
                             Container(
                               decoration: BoxDecoration(
                                 boxShadow: [BoxShadow(
@@ -181,28 +250,67 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                                   spreadRadius: 0.4
                                 )]
                               ),
-                              child: TextFormField(
-                                controller: cityController,
-                                autovalidateMode: AutovalidateMode.onUserInteraction,
-                                validator: ((value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter your city';
-                                  }
-                                  city = value;
-                                  return null;
-                                }),
-                                decoration: InputDecoration(
-                                  fillColor: Colors.white,
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.black)
-                                  ),
-                                  labelText: "City",
-                                  // labelStyle: TextStyle(
-                                  //   color: 
-                                  // )
+                              child: FutureBuilder<List<City>>(
+                                future: cityData,
+                                builder: (context, snapshot){
+                                  if(snapshot.hasData){
+                                    return DropdownButton(
+                                      isExpanded: true,
+                                      value: selectedCity,
+                                      icon: Icon(Icons.arrow_drop_down),
+                                      iconSize: 30,
+                                      elevation: 16,
+                                      style: TextStyle(color: Colors.black),
+                                      hint: selectedCity == null
+                                      ? Text('Pilih Kota')
+                                      : Text(selectedCity.cityName),
+                                      items: snapshot.data!.map<DropdownMenuItem<City>>(
+                                        (City value){
+                                          return DropdownMenuItem(
+                                            value: value,
+                                            child: Text(value.cityName.toString())
+                                          );
+                                        }
+                                      ).toList(),
+                                      onChanged: (newValue){
+                                        setState(() {
+                                          selectedCity = newValue;
+                                        });
 
-                                ),
+                                      }
+                                    );
+                                  }else if(snapshot.hasError){
+                                    return Text("Tidak ada data.");
+                                  }
+                                  if (isProvSelected == false) {
+                                    return Text("Pilih Provinsi dulu");
+                                  } else {
+                                    return UiLoading.loadingDD();
+                                  }
+                                }
                               ),
+                              // TextFormField(
+                              //   controller: cityController,
+                              //   autovalidateMode: AutovalidateMode.onUserInteraction,
+                              //   validator: ((value) {
+                              //     if (value!.isEmpty) {
+                              //       return 'Please enter your city';
+                              //     }
+                              //     city = value;
+                              //     return null;
+                              //   }),
+                              //   decoration: InputDecoration(
+                              //     fillColor: Colors.white,
+                              //     enabledBorder: UnderlineInputBorder(
+                              //       borderSide: BorderSide(color: Colors.black)
+                              //     ),
+                              //     labelText: "City",
+                              //     // labelStyle: TextStyle(
+                              //     //   color: 
+                              //     // )
+
+                              //   ),
+                              // ),
                             ),
                             Container(
                               decoration: BoxDecoration(
@@ -258,7 +366,7 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(color: Colors.black)
                                   ),
-                                  labelText: "Price (Rp.)",
+                                  labelText: "Price (Month)",
                                   // labelStyle: TextStyle(
                                   //   color: 
                                   // )
@@ -290,6 +398,36 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                                     borderSide: BorderSide(color: Colors.black)
                                   ),
                                   labelText: "Description",
+                                  // labelStyle: TextStyle(
+                                  //   color: 
+                                  // )
+
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                boxShadow: [BoxShadow(
+                                  color: Colors.white,
+                                  blurRadius: 2.0,
+                                  spreadRadius: 0.4
+                                )]
+                              ),
+                              child: TextFormField(
+                                autovalidateMode: AutovalidateMode.onUserInteraction,
+                                validator: ((value) {
+                                  if (value!.isEmpty) {
+                                    return 'Please enter your Minimum Rent Duration (Month)';
+                                  }
+                                  minimumRent = value;
+                                  return null;
+                                }),
+                                decoration: InputDecoration(
+                                  fillColor: Colors.white,
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.black)
+                                  ),
+                                  labelText: "Minimum Rent (Month)",
                                   // labelStyle: TextStyle(
                                   //   color: 
                                   // )
@@ -391,8 +529,12 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
   }
   void _addKontrakan() async {
 
-    KontrakanService.addKontrakan(Kontrakan(address: address, city: city, province: province, pricePerYear: int.parse(price), description: desc, userId: id), selectedImage);
-    Navigator.pop(context) ;
-
+    KontrakanService.addKontrakan(Kontrakan(address: address, city: selectedCity.cityName.toString(), province: selectedProv.provinceName.toString(), pricePerYear: int.parse(price), description: desc, userId: id, minimumRent: int.parse(minimumRent)), selectedImage);
+    Navigator.pushAndRemoveUntil<dynamic>(
+      context,
+      MaterialPageRoute<dynamic>(
+        builder: (context) => Managekontrakan(userId: id,)),
+        (Route<dynamic> route) =>false
+    );
   }
 }

@@ -10,7 +10,41 @@ import 'package:http/http.dart' as http;
 class KontrakanService{
   static Future<List<Kontrakan>> getKontrakan(int userId) async{
     var response = await http.post(
-      Uri.https(Const.baseUrl, '/api/index'),
+      Uri.https(Const.baseUrl, '/api/kontrakan/indexlessor'),
+      headers: <String,String> {
+        "Content-Type" : "application/json; charset=UTF-8",
+      },
+      body: jsonEncode(<String, dynamic>{
+        'UserID' : userId
+      })
+    );
+    var jsonObject = json.decode(response.body);
+    List<Kontrakan> kontrakan = [];
+
+    kontrakan = (jsonObject["data"] as List).map((e) => Kontrakan.fromJson(e)).toList();
+    return kontrakan;
+  }
+
+  static Future<List<Kontrakan>> getActiveKontrakan(int userId) async{
+    var response = await http.post(
+      Uri.https(Const.baseUrl, '/api/kontrakan/active'),
+      headers: <String,String> {
+        "Content-Type" : "application/json; charset=UTF-8",
+      },
+      body: jsonEncode(<String, dynamic>{
+        'UserID' : userId
+      })
+    );
+    var jsonObject = json.decode(response.body);
+    List<Kontrakan> kontrakan = [];
+
+    kontrakan = (jsonObject["data"] as List).map((e) => Kontrakan.fromJson(e)).toList();
+    return kontrakan;
+  }
+
+  static Future<List<Kontrakan>> getNotActiveKontrakan(int userId) async{
+    var response = await http.post(
+      Uri.https(Const.baseUrl, '/api/kontrakan/notactive'),
       headers: <String,String> {
         "Content-Type" : "application/json; charset=UTF-8",
       },
@@ -33,7 +67,7 @@ class KontrakanService{
     var length = await _image.length();
 
     // string to uri
-    var uri = Uri.parse('https://kontrakin.imtstack.com/api/store');
+    var uri = Uri.parse('https://'+Const.baseUrl+'/api/kontrakan/store');
 
     // create multipart request
     var request = new http.MultipartRequest("POST", uri);
@@ -45,6 +79,7 @@ class KontrakanService{
     request.fields['Price_per_year'] = kontrakan.pricePerYear.toString();
     request.fields['Description'] = kontrakan.description ?? '';
     request.fields['UserID'] = kontrakan.userId.toString();
+    request.fields['MinimumRent'] = kontrakan.minimumRent.toString();
 
     // multipart that takes file.. here this "image_file" is a key of the API request
     var multipartFile = new http.MultipartFile('Image', stream, length, filename: basename(_image.path));
@@ -76,7 +111,7 @@ class KontrakanService{
     var length = await _image.length();
 
     // string to uri
-    var uri = Uri.parse('https://kontrakin.imtstack.com/api/update');
+    var uri = Uri.parse('https://'+Const.baseUrl+'/api/kontrakan/update');
 
     // create multipart request
     var request = new http.MultipartRequest("POST", uri);
@@ -88,6 +123,7 @@ class KontrakanService{
     request.fields['Province'] = kontrakan.province ?? '';
     request.fields['Price_per_year'] = kontrakan.pricePerYear.toString();
     request.fields['Description'] = kontrakan.description ?? '';
+    request.fields['MinimumRent'] = kontrakan.minimumRent.toString();
 
     // multipart that takes file.. here this "image_file" is a key of the API request
     var multipartFile = new http.MultipartFile('Image', stream, length, filename: basename(_image.path));
@@ -113,7 +149,37 @@ class KontrakanService{
   }
   static void deleteKontrakan(int id) async{
     var response = await http.post(
-      Uri.https(Const.baseUrl, '/api/delete'),
+      Uri.https(Const.baseUrl, '/api/kontrakan/delete'),
+      headers: <String,String> {
+        "Content-Type" : "application/json; charset=UTF-8",
+      },
+      body: jsonEncode(<String, int>{
+        'id' : id
+      })
+    );
+    var jsonObject = json.decode(response.body);
+
+    return jsonObject;
+  }
+
+  static void setActiveKontrakan(int id) async{
+    var response = await http.post(
+      Uri.https(Const.baseUrl, '/api/kontrakan/setactive'),
+      headers: <String,String> {
+        "Content-Type" : "application/json; charset=UTF-8",
+      },
+      body: jsonEncode(<String, int>{
+        'id' : id
+      })
+    );
+    var jsonObject = json.decode(response.body);
+
+    return jsonObject;
+  }
+
+  static void setNotActiveKontrakan(int id) async{
+    var response = await http.post(
+      Uri.https(Const.baseUrl, '/api/kontrakan/setnotactive'),
       headers: <String,String> {
         "Content-Type" : "application/json; charset=UTF-8",
       },

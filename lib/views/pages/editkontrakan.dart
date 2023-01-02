@@ -1,8 +1,8 @@
 part of 'pages.dart';
 
 class Editkontrakan extends StatefulWidget {
-  Editkontrakan(this.kontrakan, {Key? key}) : super(key: key);
-
+  Editkontrakan(this.kontrakan, {this.id, Key? key}) : super(key: key);
+  var id;
   Kontrakan kontrakan;
 
   @override
@@ -24,6 +24,7 @@ class _EditkontrakanState extends State<Editkontrakan> {var id;
       selectedImage = File(img!.path);
     }));
   }
+  
 
   final _keyState = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -33,6 +34,7 @@ class _EditkontrakanState extends State<Editkontrakan> {var id;
   TextEditingController provinceController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController descController = TextEditingController();
+  TextEditingController minimumRentController = TextEditingController();
 
   @override
   void initState(){
@@ -42,6 +44,7 @@ class _EditkontrakanState extends State<Editkontrakan> {var id;
     provinceController.text = widget.kontrakan.province!;
     priceController.text = widget.kontrakan.pricePerYear.toString();
     descController.text = widget.kontrakan.description!;
+    minimumRentController.text  = widget.kontrakan.minimumRent.toString();
   }
 
   void myAlert() {
@@ -137,7 +140,8 @@ class _EditkontrakanState extends State<Editkontrakan> {var id;
                                   spreadRadius: 0.4
                                 )]
                               ),
-                              child: TextFormField(
+                              child: 
+                              TextFormField(
                                 controller: provinceController,
                                 autovalidateMode: AutovalidateMode.onUserInteraction,
                                 validator: (value) {
@@ -167,7 +171,8 @@ class _EditkontrakanState extends State<Editkontrakan> {var id;
                                   spreadRadius: 0.4
                                 )]
                               ),
-                              child: TextFormField(
+                              child: 
+                              TextFormField(
                                 controller: cityController,
                                 autovalidateMode: AutovalidateMode.onUserInteraction,
                                 validator: (value) {
@@ -279,6 +284,36 @@ class _EditkontrakanState extends State<Editkontrakan> {var id;
                                 ),
                               ),
                             ),
+                            Container(
+                              decoration: BoxDecoration(
+                                boxShadow: [BoxShadow(
+                                  color: Colors.white,
+                                  blurRadius: 2.0,
+                                  spreadRadius: 0.4
+                                )]
+                              ),
+                              child: TextFormField(
+                                controller: minimumRentController,
+                                autovalidateMode: AutovalidateMode.onUserInteraction,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Please enter description';
+                                  }
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                  fillColor: Colors.white,
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.black)
+                                  ),
+                                  labelText: "Minimum Rent (Month)",
+                                  // labelStyle: TextStyle(
+                                  //   color: 
+                                  // )
+
+                                ),
+                              ),
+                            ),
                             SizedBox(height: 8,),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -327,29 +362,29 @@ class _EditkontrakanState extends State<Editkontrakan> {var id;
                               )
                             : Text("No Image"),
                             SizedBox(height: 16),
-                            // SizedBox(
-                            //   width: double.infinity,
-                            //   height: 50,
-                            //   child: ElevatedButton(
-                            //     onPressed: (() {
-                            //       if (_keyState.currentState?.validate() ?? true) {
-                            //         _editKontrakan();
-                            //       }
-                            //     }),
-                            //     style: ElevatedButton.styleFrom(
-                            //       backgroundColor: Color(0xff0042C1),
-                            //       elevation: 0,
-                            //       textStyle: TextStyle(
-                            //         fontSize: 18,
-                            //         fontWeight: FontWeight.bold,
-                            //       ),
-                            //       shape: RoundedRectangleBorder(
-                            //         borderRadius: BorderRadius.circular(6)
-                            //       )
-                            //     ),
-                            //     child: Text("Edit"),
-                            //   )
-                            // )
+                            SizedBox(
+                              width: double.infinity,
+                              height: 50,
+                              child: ElevatedButton(
+                                onPressed: (() {
+                                  if (_keyState.currentState?.validate() ?? true) {
+                                    _editKontrakan();
+                                  }
+                                }),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Color(0xff0042C1),
+                                  elevation: 0,
+                                  textStyle: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6)
+                                  )
+                                ),
+                                child: Text("Edit"),
+                              )
+                            )
                         ] ,
                         )
                       ),
@@ -362,8 +397,11 @@ class _EditkontrakanState extends State<Editkontrakan> {var id;
     );
   }
   void _editKontrakan() async {
-    KontrakanService.editKontrakan(Kontrakan(address: addressController.text, city: cityController.text, province: provinceController.text, pricePerYear: int.parse(priceController.text), description: descController.text, id: widget.kontrakan.id), selectedImage);
-    Navigator.pop(context) ;
-
+    KontrakanService.editKontrakan(Kontrakan(address: addressController.text, city: cityController.text, province: provinceController.text, pricePerYear: int.parse(priceController.text), description: descController.text, id: widget.kontrakan.id, minimumRent: int.parse(minimumRentController.text)), selectedImage);
+    Navigator.push<dynamic>(
+      context,
+      MaterialPageRoute<dynamic>(
+        builder: (context) => Managekontrakan(userId: widget.id,)),
+    );
   }
 }

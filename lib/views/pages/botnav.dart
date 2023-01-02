@@ -2,7 +2,9 @@ part of 'pages.dart';
 
 class Botnav extends StatefulWidget {
   final int index;
-  const Botnav({Key? key, required this.index}) : super(key: key);
+  Botnav({Key? key, required this.index, required this.userID}) : super(key: key);
+
+  var userID;
 
   @override
   _BotnavState createState() => _BotnavState();
@@ -10,16 +12,19 @@ class Botnav extends StatefulWidget {
 
 class _BotnavState extends State<Botnav> {
   int _currentIndex = 0;
+  var userID;
 
   @override
   void initState() {
     _currentIndex = widget.index;
+    userID = widget.userID;
     super.initState();
   }
 
-  final tabs = [
-    Dashboard(), 
-    Carikontrakan()
+  late final tabs = [
+      Dashboard(lessorID: userID), 
+      Carikontrakan(),
+      Profile(id: userID,),
   ];
 
   @override

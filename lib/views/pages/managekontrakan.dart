@@ -10,22 +10,32 @@ class Managekontrakan extends StatefulWidget {
 
 class _ManagekontrakanState extends State<Managekontrakan> {
   var id;
-  List<dynamic> listKontrakan = [];
+  List<dynamic> listActiveKontrakan = [];
+  List<dynamic> listNotActiveKontrakan = [];
 
   @override
   void initState() {
     super.initState();
     id = widget.userId;
-    getKontrakan();
+    getActiveKontrakan();
+    getNotActiveKontrakan();
   }
 
-  Future<dynamic> getKontrakan() async{
-    await KontrakanService.getKontrakan(id).then((value) {
+  Future<dynamic> getActiveKontrakan() async{
+    await KontrakanService.getActiveKontrakan(id).then((value) {
       setState(() {
-        listKontrakan = value;
+        listActiveKontrakan = value;
       });
     });
-    print(listKontrakan.toString());
+    print(listActiveKontrakan.toString());
+  }
+  Future<dynamic> getNotActiveKontrakan() async{
+    await KontrakanService.getNotActiveKontrakan(id).then((value) {
+      setState(() {
+        listNotActiveKontrakan = value;
+      });
+    });
+    print(listNotActiveKontrakan.toString());
   }
 
   @override
@@ -44,7 +54,12 @@ class _ManagekontrakanState extends State<Managekontrakan> {
                       children: [
                         GestureDetector(
                           onTap: (){
-                            Navigator.pop(context);
+                            Navigator.pushAndRemoveUntil<dynamic>(
+                              context,
+                              MaterialPageRoute<dynamic>(
+                                builder: (context) => Botnav(index: 2, userID: id)),
+                                (Route<dynamic> route) =>false
+                            );
                           },
                           child: Icon(Icons.arrow_back_ios_new, size: 20,),
                         ),
@@ -75,10 +90,17 @@ class _ManagekontrakanState extends State<Managekontrakan> {
                     //     },
                     //   )
                     // )
+                    Text(
+                          "Active",
+                          style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold
+                        ),),
                     Flexible(
                       child : ListView.builder(
                         scrollDirection: Axis.vertical,
-                        itemCount: listKontrakan.length,
+                        itemCount: listActiveKontrakan.length,
                         itemBuilder: ((context, index) {
                           return LazyLoadingList(
                             loadMore: (){}, 
@@ -91,7 +113,7 @@ class _ManagekontrakanState extends State<Managekontrakan> {
                                 splashColor: Colors.blue.withAlpha(30),
                                 onTap: () {
                                   Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) => Detailkontrakan(listKontrakan[index])));
+                                      MaterialPageRoute(builder: (context) => Detailkontrakan(listActiveKontrakan[index])));
                                 },
                                 child: SizedBox(
                                   width: 400,
@@ -106,7 +128,7 @@ class _ManagekontrakanState extends State<Managekontrakan> {
                                             bottomLeft: Radius.circular(6)
                                           ),
                                           image: DecorationImage(
-                                            image: NetworkImage("https://kontrakin.imtstack.com/storage/" + listKontrakan[index].image),
+                                            image: NetworkImage("https://kontrakin.imtstack.com/storage/" + listActiveKontrakan[index].image),
                                             fit: BoxFit.cover
                                           )
                                         ),
@@ -123,11 +145,106 @@ class _ManagekontrakanState extends State<Managekontrakan> {
                                             ),
                                             children: [
                                               TextSpan(
-                                                text: listKontrakan[index].description.toString()+"\n",
+                                                text: listActiveKontrakan[index].description.toString()+"\n",
                                                 style: TextStyle(height: 1.3)
                                               ),
                                               TextSpan(
-                                                text: "Kota " + listKontrakan[index].city,
+                                                text: "Kota " + listActiveKontrakan[index].city,
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.normal
+                                                )
+                                              )
+                                            ]
+                                          ),
+                                        ),
+                                      ),
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(6),
+                                          bottomRight: Radius.circular(6)
+                                        ),
+                                        child: SizedBox(
+                                          width: 6,
+                                          height: 100,
+                                          child: DecoratedBox(
+                                            decoration: BoxDecoration(
+                                              color: Color(0xff0042C1)
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            index: index, 
+                            hasMore: true);
+                        }),
+                      )
+                    ),
+                    Text(
+                          "Not Active",
+                          style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold
+                        ),),
+                    Flexible(
+                      child : ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: listNotActiveKontrakan.length,
+                        itemBuilder: ((context, index) {
+                          return LazyLoadingList(
+                            loadMore: (){}, 
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6)
+                              ),
+                              elevation: 8,
+                              child: InkWell(
+                                splashColor: Colors.blue.withAlpha(30),
+                                onTap: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => Detailkontrakan(listNotActiveKontrakan[index], userID: id,)));
+                                },
+                                child: SizedBox(
+                                  width: 400,
+                                  height: 100,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 100,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(6),
+                                            bottomLeft: Radius.circular(6)
+                                          ),
+                                          image: DecorationImage(
+                                            image: NetworkImage("https://kontrakin.imtstack.com/storage/" + listNotActiveKontrakan[index].image),
+                                            fit: BoxFit.cover
+                                          )
+                                        ),
+                                        
+                                      ),
+                                      SizedBox(width: 16,),
+                                      Expanded(
+                                        child: RichText(
+                                          text: TextSpan(
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold
+                                            ),
+                                            children: [
+                                              TextSpan(
+                                                text: listNotActiveKontrakan[index].description.toString()+"\n",
+                                                style: TextStyle(height: 1.3)
+                                              ),
+                                              TextSpan(
+                                                text: listNotActiveKontrakan[index].city,
                                                 style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 12,

@@ -25,7 +25,6 @@ class _CheckAuthState extends State<CheckAuth> {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     var token = localStorage.getString('token');
     var role = localStorage.getString('role');
-    var user = jsonDecode(localStorage.getString('user')??"");
     if (token != null && role != null) {
       if (mounted) {
         setState(() {
@@ -33,6 +32,7 @@ class _CheckAuthState extends State<CheckAuth> {
           if (role.compareTo('"owner"') == 0) {
             isPenyewa = false;
           }
+          var user = jsonDecode(localStorage.getString('user') ?? '');
           userId = user['id'];
         });
       }
@@ -44,10 +44,14 @@ class _CheckAuthState extends State<CheckAuth> {
     Widget child;
     if (isAuth && isPenyewa) {
       child = Botnav(
-        index: 0
+        index: 0,
+        userID: userId,
       );
     } else if (isAuth && isPenyewa == false) {
-      child = Profile(id: userId,);
+      child = Botnav(
+        index: 2,
+        userID: userId,
+      );
     } else {
       child = Pilihrole();
     }

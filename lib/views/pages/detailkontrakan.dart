@@ -1,8 +1,8 @@
 part of 'pages.dart';
 
 class Detailkontrakan extends StatefulWidget {
-  Detailkontrakan(this.kontrakan, {Key? key}) : super(key: key);
-
+  Detailkontrakan(this.kontrakan, {this.userID, Key? key}) : super(key: key);
+  var userID;
   Kontrakan kontrakan;
 
   @override
@@ -11,6 +11,13 @@ class Detailkontrakan extends StatefulWidget {
 
 class _DetailkontrakanState extends State<Detailkontrakan> {
 
+  var id;
+
+  @override
+    void initState() {
+      super.initState();
+      id = widget.userID;
+  }
   
   final _keyState = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -136,6 +143,16 @@ class _DetailkontrakanState extends State<Detailkontrakan> {
                                 children: <Widget>[
                                   
                                   Row(children: <Widget>[
+                                    Text("Minimum Sewa",
+                                        style: TextStyle(fontSize: 15)),
+                                    Spacer(),
+                                    Text(widget.kontrakan.minimumRent.toString()+' Bulan',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xff0042C1))),
+                                  ]),
+                                  Row(children: <Widget>[
                                     Text("Biaya Sewa",
                                         style: TextStyle(fontSize: 15)),
                                     Spacer(),
@@ -181,18 +198,62 @@ class _DetailkontrakanState extends State<Detailkontrakan> {
                                   ],
                                 )
                               ],
-                            ))),     
+                            ))),
+                            Text("Status Kontrakan",
+                                        style: TextStyle(fontSize: 15)),
+                                    Text(widget.kontrakan.active.toString() == "0" ? "Tidak Aktif" : "Aktif",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xff0042C1))),
+                    SizedBox(height: 50),
+                      SizedBox(
+                          width: double.infinity,
+                          height: 50,
+                          child: 
+                          widget.kontrakan.active == 0 ?
+                            ElevatedButton(
+                              onPressed: () {
+                                KontrakanService.setActiveKontrakan(widget.kontrakan.id!);
+                                
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.orange.shade900,
+                                  elevation: 0,
+                                  textStyle: TextStyle(
+                                      fontSize: 14, fontWeight: FontWeight.bold),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(6))),
+                              child: Text('Aktifkan'))
+                          : 
+                          ElevatedButton(
+                            onPressed: () {
+                              KontrakanService.setNotActiveKontrakan(widget.kontrakan.id!);
+                              
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.orange.shade900,
+                                elevation: 0,
+                                textStyle: TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.bold),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6))),
+                            child: Text("Matikan"))
+                        ),
+                    
+                    
+                    SizedBox(height: 16),     
                     SizedBox(height: 50),
                     SizedBox(
                         width: double.infinity,
                         height: 50,
                         child: ElevatedButton(
                             onPressed: () {
-                              Navigator.pushAndRemoveUntil<dynamic>(
+                              Navigator.push<dynamic>(
                                   context,
                                   MaterialPageRoute<dynamic>(
-                                      builder: (context) => Editkontrakan(widget.kontrakan)),
-                                  (route) => false);
+                                      builder: (context) => Editkontrakan(widget.kontrakan, id: widget.userID,)),
+                                  );
                             },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.orange.shade900,
@@ -226,7 +287,13 @@ class _DetailkontrakanState extends State<Detailkontrakan> {
   
 void _deleteKontrakan() async {
     KontrakanService.deleteKontrakan(widget.kontrakan.id!);
-    Navigator.pop(context);
+    print("deletedetail"+widget.kontrakan.id.toString());
+    Navigator.pushAndRemoveUntil<dynamic>(
+      context,
+      MaterialPageRoute<dynamic>(
+        builder: (context) => Managekontrakan(userId: id)),
+        (Route<dynamic> route) =>false
+    );
 
   }
   void showAlert(BuildContext context) {
