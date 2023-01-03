@@ -358,6 +358,9 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                                   if (value!.isEmpty) {
                                     return 'Please enter your price';
                                   }
+                                  if (value.contains(new RegExp(r'[a-z]'))) {
+                                    return 'Please input valid price';
+                                  }
                                   price = value;
                                   return null;
                                 }),
@@ -418,6 +421,9 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                                 validator: ((value) {
                                   if (value!.isEmpty) {
                                     return 'Please enter your Minimum Rent Duration (Month)';
+                                  }
+                                  if (value.contains(new RegExp(r'[a-z]'))) {
+                                    return 'Please input valid price';
                                   }
                                   minimumRent = value;
                                   return null;
