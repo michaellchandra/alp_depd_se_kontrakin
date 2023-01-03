@@ -90,6 +90,7 @@ class _ManagekontrakanState extends State<Managekontrakan> {
                     //     },
                     //   )
                     // )
+                    SizedBox(height: 24),
                     Text(
                           "Active",
                           style: TextStyle(
@@ -265,7 +266,7 @@ class _ManagekontrakanState extends State<Managekontrakan> {
                                           height: 100,
                                           child: DecoratedBox(
                                             decoration: BoxDecoration(
-                                              color: Color(0xff0042C1)
+                                              color: Colors.grey
                                             ),
                                           ),
                                         ),
