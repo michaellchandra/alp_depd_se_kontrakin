@@ -1,32 +1,13 @@
-part of 'pages.dart';
+part of '../pages/pages.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+class Dashboardpenyewa extends StatefulWidget {
+  const Dashboardpenyewa({ Key? key }) : super(key: key);
 
   @override
-  _DashboardState createState() => _DashboardState();
+  _DashboardpenyewaState createState() => _DashboardpenyewaState();
 }
 
-class _DashboardState extends State<Dashboard> {
-  String name = '';
-
-  @override
-  void initState() {
-    super.initState();
-    _loadUserData();
-  }
-
-  _loadUserData() async {
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    var user = jsonDecode(localStorage.getString('user')!);
-
-    if (user != null) {
-      setState(() {
-        name = user['name'];
-      });
-    }
-  }
-
+class _DashboardpenyewaState extends State<Dashboardpenyewa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +28,7 @@ class _DashboardState extends State<Dashboard> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Container(
+                              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                               padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
                               child: Text(
                                 "Selamat Datang",
@@ -65,7 +47,7 @@ class _DashboardState extends State<Dashboard> {
                             Container(
                               padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
                               child: Text(
-                                '${name}',
+                                'Penyewa',
                                 style: TextStyle(
                                   fontSize: 28,
                                   fontWeight: FontWeight.bold,
@@ -75,63 +57,12 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 8),
-                        Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          elevation: 8,
-                          color: Color(0xff0042C1),
-                          child: InkWell(
-                            splashColor: Colors.white.withAlpha(30),
-                            onTap: () {
-                              Navigator.pushAndRemoveUntil<dynamic>(
-                                  context,
-                                  MaterialPageRoute<dynamic>(
-                                      builder: (context) => Listtransaksi()),
-                                  (route) => false);
-                            },
-                            child: SizedBox(
-                              width: 400,
-                              height: 85,
-                              child: Row(
-                                children: <Widget>[
-                                  SizedBox(width: 10),
-                                  Icon(Icons.document_scanner_outlined,
-                                      size: 50, color: Colors.white),
-                                  SizedBox(width: 10),
-                                  Expanded(
-                                    child: RichText(
-                                      text: new TextSpan(
-                                          style: new TextStyle(
-                                              fontSize: 20,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                          children: <TextSpan>[
-                                            new TextSpan(
-                                                text: "List Transaksi\n",
-                                                style: TextStyle(height: 1.3)),
-                                            new TextSpan(
-                                                text:
-                                                    "Yuk cek calon penyewa kontrakanmu!",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.normal)),
-                                          ]),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 15),
+                        SizedBox(height: 26),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Container(
+                              margin: EdgeInsets.fromLTRB(0, 12, 0, 0),
                               padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
                               child: Text("Informasi Terkini",
                                   style: TextStyle(
@@ -396,6 +327,7 @@ class _DashboardState extends State<Dashboard> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           elevation: 8,
+                          color: Color(0xff0042C1),
                           child: InkWell(
                             splashColor: Colors.blue.withAlpha(30),
                             onTap: () {
@@ -413,7 +345,7 @@ class _DashboardState extends State<Dashboard> {
                                 child: Row(
                                   children: <Widget>[
                                     SizedBox(width: 16),
-                                    Icon(Icons.share_outlined, size: 50),
+                                    Icon(Icons.share_outlined, size: 50, color: Color(0xffF9F9F9)),
                                     SizedBox(width: 12),
                                     Expanded(
                                       child: RichText(
@@ -426,15 +358,20 @@ class _DashboardState extends State<Dashboard> {
                                               new TextSpan(
                                                   text: "Undang Teman\n",
                                                   style:
-                                                      TextStyle(height: 1.3)),
+                                                      TextStyle(
+                                                        height: 1.3,
+                                                        color: Color(0xffF9F9F9)
+                                                      )
+                                              ),
                                               new TextSpan(
                                                   text:
                                                       "Dapatkan voucher diskon biaya sewa kontrakan dengan mengundang teman menggunakan KONTRAKIN\n",
                                                   style: TextStyle(
-                                                      color: Colors.black,
+                                                      color: Color(0xffF9F9F9),
                                                       fontSize: 14,
                                                       fontWeight:
-                                                          FontWeight.normal)),
+                                                          FontWeight.normal)
+                                              ),
                                             ]),
                                       ),
                                     ),
@@ -451,7 +388,7 @@ class _DashboardState extends State<Dashboard> {
                           height: 30,
                           child: ElevatedButton(
                               onPressed: () {
-                                logout();
+
                               },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xff0042C1),
@@ -472,18 +409,5 @@ class _DashboardState extends State<Dashboard> {
             ],
           )),
     );
-  }
-
-  void logout() async {
-    var res = await Network().getData('/logout');
-    var body = json.decode(res.body);
-    if (body['success']) {
-      SharedPreferences localStorage = await SharedPreferences.getInstance();
-      localStorage.remove('user');
-      localStorage.remove('token');
-      localStorage.remove('role');
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Login()));
-    }
   }
 }

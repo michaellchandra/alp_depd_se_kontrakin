@@ -2,14 +2,13 @@ part of 'pages.dart';
 
 class Botnav extends StatefulWidget {
   final int index;
-  const Botnav({ Key? key, required this.index }) : super(key: key);
+  const Botnav({Key? key, required this.index}) : super(key: key);
 
   @override
   _BotnavState createState() => _BotnavState();
 }
 
 class _BotnavState extends State<Botnav> {
-
   int _currentIndex = 0;
 
   @override
@@ -19,9 +18,8 @@ class _BotnavState extends State<Botnav> {
   }
 
   final tabs = [
-    Dashboard(),
-    Center(child: Text("Browse")),
-    Profile()
+    Dashboard(), 
+    Carikontrakan()
   ];
 
   @override
@@ -36,20 +34,13 @@ class _BotnavState extends State<Botnav> {
         backgroundColor: Colors.grey[100],
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded),
-            label: "Home"
-          ),
+              icon: Icon(Icons.home_rounded), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Browse"),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: "Browse"
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: "Profile"
-          )
+              icon: Icon(Icons.person_outline), label: "Profile")
         ],
         onTap: (index) {
-          setState((){
+          setState(() {
             _currentIndex = index;
           });
         },
