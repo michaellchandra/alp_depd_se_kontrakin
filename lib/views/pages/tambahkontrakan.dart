@@ -369,7 +369,7 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(color: Colors.black)
                                   ),
-                                  labelText: "Price (Month)",
+                                  labelText: "Price (Year)",
                                   // labelStyle: TextStyle(
                                   //   color: 
                                   // )
@@ -420,7 +420,7 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                                 autovalidateMode: AutovalidateMode.onUserInteraction,
                                 validator: ((value) {
                                   if (value!.isEmpty) {
-                                    return 'Please enter your Minimum Rent Duration (Month)';
+                                    return 'Please enter your Minimum Rent Duration (Year)';
                                   }
                                   if (value.contains(new RegExp(r'[a-z]'))) {
                                     return 'Please input valid price';
@@ -433,7 +433,7 @@ class _TambahkontrakanState extends State<Tambahkontrakan> {
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(color: Colors.black)
                                   ),
-                                  labelText: "Minimum Rent (Month)",
+                                  labelText: "Minimum Rent (Year)",
                                   // labelStyle: TextStyle(
                                   //   color: 
                                   // )
