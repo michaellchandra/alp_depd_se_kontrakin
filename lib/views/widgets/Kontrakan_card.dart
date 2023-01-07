@@ -5,14 +5,8 @@ import 'package:flutter/material.dart';
 
 
 class KontrakanCard extends StatefulWidget {
-  String? city;
-  String? address;
-  int? pricePerYear;
   Kontrakan? kontrakan;
   KontrakanCard({super.key,
-      required this.city,
-      required this.address,
-      required this.pricePerYear,
       required this.kontrakan});
 
   @override

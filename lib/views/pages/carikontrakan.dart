@@ -119,7 +119,7 @@ class _CarikontrakanState extends State<Carikontrakan> {
                         return LazyLoadingList(
                           initialSizeOfItems: 10,
                           loadMore: (){}, 
-                          child: KontrakanCard(city: listKontrakan[index].city, address: listKontrakan[index].address, pricePerYear: listKontrakan[index].pricePerYear, kontrakan: listKontrakan[index],),
+                          child: KontrakanCard(kontrakan: listKontrakan[index]),
                           index: index, 
                           hasMore: true);
                       }),
