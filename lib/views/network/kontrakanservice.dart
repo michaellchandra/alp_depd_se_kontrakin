@@ -25,6 +25,28 @@ class KontrakanService{
     return kontrakan;
   }
 
+  static Future<List<Kontrakan>> getListKontrakan(String query) async{
+    var response = await http.post(
+      Uri.https(Const.baseUrl, '/api/kontrakan/indexlessee'),
+      headers: <String,String> {
+        "Content-Type" : "application/json; charset=UTF-8",
+      },
+    );
+    var jsonObject = json.decode(response.body);
+    List<Kontrakan> kontrakan = [];
+
+    kontrakan = (jsonObject["data"] as List).map((e) => Kontrakan.fromJson(e)).where((e) {
+      final addressLower = e.address!.toLowerCase();
+      final cityLower = e.city!.toLowerCase();
+      final provinceLower = e.province!.toLowerCase();
+      final searchLower = query.toLowerCase();
+
+      return addressLower.contains(searchLower) || cityLower.contains(searchLower) || provinceLower.contains(searchLower);
+    }).toList();
+    print(kontrakan.toString());
+    return kontrakan;
+  }
+
   static Future<List<Kontrakan>> getActiveKontrakan(int userId) async{
     var response = await http.post(
       Uri.https(Const.baseUrl, '/api/kontrakan/active'),
