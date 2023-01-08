@@ -13,7 +13,7 @@ class _DetailtransaksiState extends State<Detailtransaksi> {
 
   dynamic transaksi;
   var lolid;
-  var remainingDate = "", id = 0, startDate = "", rentDuration = 0, lesseeName = "", lessorName = "";
+  var remainingDate = "", id = 0, startDate = "", rentDuration = 0, lesseeName = "", lessorName = "", image = "";
 
   @override
   void initState() {
@@ -32,6 +32,7 @@ class _DetailtransaksiState extends State<Detailtransaksi> {
         rentDuration = value.rentDuration!;
         lesseeName = value.lesseeName!;
         lessorName = value.lessorName!;
+        image = value.image!;
       });
     });
   }
@@ -137,9 +138,7 @@ class _DetailtransaksiState extends State<Detailtransaksi> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(6),
                     child: Image(
-                      image: NetworkImage(
-                        "https://cf.bstatic.com/xdata/images/hotel/max1280x900/314234927.jpg?k=21291418450e2c1802e02864677b7cf811321797b1d36aaa55e1019133f82698&o=&hp=1"
-                      )
+                      image: NetworkImage("https://kontrakin.imtstack.com/storage/" + image)
                     )
                   )
                 ),
@@ -223,7 +222,7 @@ class _DetailtransaksiState extends State<Detailtransaksi> {
                             ),
                             Spacer(),
                             Text(
-                              rentDuration.toString(),
+                              rentDuration.toString()+" Tahun",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,

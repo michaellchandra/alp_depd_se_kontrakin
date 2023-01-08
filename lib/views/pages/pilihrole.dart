@@ -64,7 +64,7 @@ class _PilihroleState extends State<Pilihrole> {
                               Navigator.pushAndRemoveUntil<dynamic>(
                                   context,
                                   MaterialPageRoute<dynamic>(
-                                      builder: (context) => Login()),
+                                      builder: (context) => Register(role: "owner")),
                                   (route) => false);
                             },
                             child: SizedBox(
@@ -114,7 +114,7 @@ class _PilihroleState extends State<Pilihrole> {
                               Navigator.pushAndRemoveUntil<dynamic>(
                                   context,
                                   MaterialPageRoute<dynamic>(
-                                      builder: (context) => Login()),
+                                      builder: (context) => Register(role: "notowner")),
                                   (route) => false);
                             },
                             child: SizedBox(

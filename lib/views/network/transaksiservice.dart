@@ -87,4 +87,38 @@ class TransaksiService{
     
     return null;
   }
+
+  static Future<List<Transaksi>> getLesseeOnGoing(int lesseeID) async{
+    var response = await http.post(
+      Uri.https(Const.baseUrl, '/api/transaction/lesseeongoing'),
+      headers: <String,String> {
+        "Content-Type" : "application/json; charset=UTF-8",
+      },
+      body: jsonEncode(<String, dynamic>{
+        'lesseeID' : lesseeID
+      })
+    );
+    var jsonObject = json.decode(response.body);
+    List<Transaksi> transaksi = [];
+
+    transaksi = (jsonObject["data"] as List).map((e) => Transaksi.fromJson(e)).toList();
+    return transaksi;
+  }
+
+  static Future<List<Transaksi>> getLesseeFinished(int lesseeID) async{
+    var response = await http.post(
+      Uri.https(Const.baseUrl, '/api/transaction/lesseefinished'),
+      headers: <String,String> {
+        "Content-Type" : "application/json; charset=UTF-8",
+      },
+      body: jsonEncode(<String, dynamic>{
+        'lesseeID' : lesseeID
+      })
+    );
+    var jsonObject = json.decode(response.body);
+    List<Transaksi> transaksi = [];
+
+    transaksi = (jsonObject["data"] as List).map((e) => Transaksi.fromJson(e)).toList();
+    return transaksi;
+  }
 }

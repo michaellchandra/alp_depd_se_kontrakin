@@ -1,13 +1,43 @@
 part of '../pages/pages.dart';
 
 class Riwayattransaksi extends StatefulWidget {
-  const Riwayattransaksi({ Key? key }) : super(key: key);
+  Riwayattransaksi({ Key? key, required this.userID }) : super(key: key);
+  var userID;
 
   @override
   _RiwayattransaksiState createState() => _RiwayattransaksiState();
 }
 
 class _RiwayattransaksiState extends State<Riwayattransaksi> {
+  List<dynamic> listOngoing = [];
+  List<dynamic> listFinished = [];
+  var lesseeID;
+
+  @override
+  void initState() {
+    super.initState();
+    lesseeID = widget.userID;
+    getOngoing();
+    getFinished();
+  }
+
+  Future<dynamic> getOngoing() async{
+    await TransaksiService.getLesseeOnGoing(lesseeID).then((value) {
+      setState(() {
+        listOngoing = value;
+      });
+    });
+    print(listOngoing.toString());
+  }
+  Future<dynamic> getFinished() async{
+    await TransaksiService.getLesseeFinished(lesseeID).then((value) {
+      setState(() {
+        listFinished = value;
+      });
+    });
+    print(listFinished.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +57,7 @@ class _RiwayattransaksiState extends State<Riwayattransaksi> {
                         Navigator.pushAndRemoveUntil<dynamic>(
                           context, 
                           MaterialPageRoute<dynamic>(
-                            builder: (context) => Profilepenyewa()
+                            builder: (context) => Profilepenyewa(userID: widget.userID,)
                           ), 
                           (route) => false
                         );
@@ -62,6 +92,17 @@ class _RiwayattransaksiState extends State<Riwayattransaksi> {
                   ],
                 ),
                 SizedBox(height: 16),
+                Container(
+                                width: 400,
+                                child : ListView.builder(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: listOngoing.length,
+                                  itemBuilder: ((context, index) {
+                                    return LazyLoadingList(
+                                      loadMore: (){}, 
+                                      child:
                 Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(6),
@@ -73,7 +114,7 @@ class _RiwayattransaksiState extends State<Riwayattransaksi> {
                       Navigator.pushAndRemoveUntil<dynamic>(
                         context,
                         MaterialPageRoute<dynamic>(
-                          builder: (context) => Detailtransaksipenyewa()
+                          builder: (context) => Detailtransaksipenyewa(listOngoing[index], userID: widget.userID)
                         ),
                         (route) => false
                       );
@@ -91,9 +132,7 @@ class _RiwayattransaksiState extends State<Riwayattransaksi> {
                                 bottomLeft: Radius.circular(6)
                               ),
                               image: DecorationImage(
-                                image: NetworkImage(
-                                  "https://cf.bstatic.com/xdata/images/hotel/max1280x900/314234927.jpg?k=21291418450e2c1802e02864677b7cf811321797b1d36aaa55e1019133f82698&o=&hp=1"
-                                ),
+                                image: NetworkImage("https://kontrakin.imtstack.com/storage/" + listOngoing[index].image),
                                 fit: BoxFit.cover
                               )
                             ),
@@ -109,11 +148,11 @@ class _RiwayattransaksiState extends State<Riwayattransaksi> {
                                 ),
                                 children: <TextSpan>[
                                   new TextSpan(
-                                    text: "Citraland South Blok 12A\n",
+                                    text: listOngoing[index].address+"\n",
                                     style: TextStyle(height: 1.3)
                                   ),
                                   new TextSpan(
-                                    text: "Tersisa ",
+                                    text: "Sewa Sampai ",
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 12,
@@ -121,7 +160,7 @@ class _RiwayattransaksiState extends State<Riwayattransaksi> {
                                     )
                                   ),
                                   new TextSpan(
-                                    text: "8 Bulan 15 Hari",
+                                    text: listOngoing[index].endDate,
                                     style: TextStyle(
                                       color: Color(0xff0042C1),
                                       fontSize: 12,
@@ -152,6 +191,11 @@ class _RiwayattransaksiState extends State<Riwayattransaksi> {
                     )
                   )
                 ),
+                                  index: index, 
+                                  hasMore: true);
+                                  }),
+                                )
+                              ),
                 SizedBox(height: 30),
                 Row(
                   children: <Widget>[
@@ -166,6 +210,17 @@ class _RiwayattransaksiState extends State<Riwayattransaksi> {
                   ],
                 ),
                 SizedBox(height: 16),
+                Container(
+                                width: 400,
+                                child : ListView.builder(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: listFinished.length,
+                                  itemBuilder: ((context, index) {
+                                    return LazyLoadingList(
+                                      loadMore: (){}, 
+                                      child:
                 Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(6),
@@ -177,7 +232,7 @@ class _RiwayattransaksiState extends State<Riwayattransaksi> {
                       Navigator.pushAndRemoveUntil<dynamic>(
                         context,
                         MaterialPageRoute<dynamic>(
-                          builder: (context) => Detailtransaksipenyewa()
+                          builder: (context) => Detailtransaksipenyewa(listFinished[index], userID: widget.userID,)
                         ),
                         (route) => false
                       );
@@ -195,9 +250,7 @@ class _RiwayattransaksiState extends State<Riwayattransaksi> {
                                 bottomLeft: Radius.circular(6)
                               ),
                               image: DecorationImage(
-                                image: NetworkImage(
-                                  "https://cf.bstatic.com/xdata/images/hotel/max1280x900/314234927.jpg?k=21291418450e2c1802e02864677b7cf811321797b1d36aaa55e1019133f82698&o=&hp=1"
-                                ),
+                                image: NetworkImage("https://kontrakin.imtstack.com/storage/" + listFinished[index].image),
                                 fit: BoxFit.cover
                               )
                             ),
@@ -213,7 +266,7 @@ class _RiwayattransaksiState extends State<Riwayattransaksi> {
                                 ),
                                 children: <TextSpan>[
                                   new TextSpan(
-                                    text: "Penthouse Blok G No.1\n",
+                                    text: listFinished[index].address+"\n",
                                     style: TextStyle(height: 1.3)
                                   ),
                                   new TextSpan(
@@ -225,7 +278,7 @@ class _RiwayattransaksiState extends State<Riwayattransaksi> {
                                     )
                                   ),
                                   new TextSpan(
-                                    text: "13 Mei 2022",
+                                    text: listFinished[index].endDate,
                                     style: TextStyle(
                                       color: Color(0xff0042C1),
                                       fontSize: 12,
@@ -256,6 +309,11 @@ class _RiwayattransaksiState extends State<Riwayattransaksi> {
                     )
                   )
                 ),
+                index: index, 
+                                  hasMore: true);
+                                  }),
+                                )
+                              ),
               ]
             ),
           )

@@ -1,7 +1,8 @@
 part of '../pages/pages.dart';
 
 class Profilepenyewa extends StatefulWidget {
-  const Profilepenyewa({ Key? key }) : super(key: key);
+  Profilepenyewa({ Key? key, required this.userID }) : super(key: key);
+  var userID;
 
   @override
   _ProfilepenyewaState createState() => _ProfilepenyewaState();
@@ -131,7 +132,7 @@ class _ProfilepenyewaState extends State<Profilepenyewa> {
                             Navigator.pushAndRemoveUntil<dynamic>(
                                 context,
                                 MaterialPageRoute<dynamic>(
-                                    builder: (context) => Riwayattransaksi()),
+                                    builder: (context) => Riwayattransaksi(userID: widget.userID)),
                                 (route) => false);
                           },
                           child: SizedBox(

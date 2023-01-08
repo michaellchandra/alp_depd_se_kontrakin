@@ -1,13 +1,40 @@
 part of '../pages/pages.dart';
 
 class Detailtransaksipenyewa extends StatefulWidget {
-  const Detailtransaksipenyewa({ Key? key }) : super(key: key);
+  Detailtransaksipenyewa(this.transaksi,{ Key? key, required this.userID }) : super(key: key);
+  Transaksi transaksi;
+  var userID;
 
   @override
   _DetailtransaksipenyewaState createState() => _DetailtransaksipenyewaState();
 }
 
 class _DetailtransaksipenyewaState extends State<Detailtransaksipenyewa> {
+  var lesseeID;
+  var remainingDate = "", id = 0, startDate = "", rentDuration = 0, lesseeName = "", lessorName = "", image = "";
+
+  @override
+  void initState() {
+    super.initState();
+    lesseeID = widget.transaksi.id;
+    print("DetailTrans"+lesseeID.toString());
+    getTransaction(lesseeID);
+  }
+
+  Future<dynamic> getTransaction(int haiid) async{
+    await TransaksiService.getDetails(haiid).then((value) {
+      setState(() {
+        remainingDate = value.remainingDate!;
+        id = value.id!;
+        startDate = value.startDate!;
+        rentDuration = value.rentDuration!;
+        lesseeName = value.lesseeName!;
+        lessorName = value.lessorName!;
+        image = value.image!;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,13 +51,7 @@ class _DetailtransaksipenyewaState extends State<Detailtransaksipenyewa> {
                   children: <Widget>[
                     new GestureDetector(
                       onTap: () {
-                        Navigator.pushAndRemoveUntil<dynamic>(
-                          context, 
-                          MaterialPageRoute<dynamic>(
-                            builder: (context) => Riwayattransaksi()
-                          ), 
-                          (route) => false
-                        );
+                        Navigator.pop(context);
                       },
                       child: SizedBox(
                         height: 50,
@@ -69,7 +90,7 @@ class _DetailtransaksipenyewaState extends State<Detailtransaksipenyewa> {
                                 )
                               ),
                               TextSpan(
-                                text: "#D-135",
+                                text: id.toString(),
                               )
                             ]
                           )
@@ -86,9 +107,7 @@ class _DetailtransaksipenyewaState extends State<Detailtransaksipenyewa> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(6),
                     child: Image(
-                      image: NetworkImage(
-                        "https://cf.bstatic.com/xdata/images/hotel/max1280x900/314234927.jpg?k=21291418450e2c1802e02864677b7cf811321797b1d36aaa55e1019133f82698&o=&hp=1"
-                      )
+                      image: NetworkImage("https://kontrakin.imtstack.com/storage/" + image)
                     )
                   )
                 ),
@@ -115,7 +134,7 @@ class _DetailtransaksipenyewaState extends State<Detailtransaksipenyewa> {
                             ),
                             Spacer(),
                             Text(
-                              "8 Bulan 15 Hari",
+                              remainingDate,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -134,7 +153,7 @@ class _DetailtransaksipenyewaState extends State<Detailtransaksipenyewa> {
                             ),
                             Spacer(),
                             Text(
-                              "Era Group",
+                              lessorName,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -153,7 +172,7 @@ class _DetailtransaksipenyewaState extends State<Detailtransaksipenyewa> {
                             ),
                             Spacer(),
                             Text(
-                              "03 Januari 2022",
+                              startDate,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -172,7 +191,7 @@ class _DetailtransaksipenyewaState extends State<Detailtransaksipenyewa> {
                             ),
                             Spacer(),
                             Text(
-                              "18 Bulan",
+                              rentDuration.toString()+" Tahun",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,

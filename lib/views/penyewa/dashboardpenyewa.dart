@@ -1,7 +1,8 @@
 part of '../pages/pages.dart';
 
 class Dashboardpenyewa extends StatefulWidget {
-  const Dashboardpenyewa({ Key? key }) : super(key: key);
+  Dashboardpenyewa({ Key? key, required this.userID }) : super(key: key);
+  var userID;
 
   @override
   _DashboardpenyewaState createState() => _DashboardpenyewaState();

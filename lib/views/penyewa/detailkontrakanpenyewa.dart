@@ -1,13 +1,44 @@
 part of '../pages/pages.dart';
 
 class Detailkontrakanpenyewa extends StatefulWidget {
-  const Detailkontrakanpenyewa({ Key? key }) : super(key: key);
+  Detailkontrakanpenyewa(this.kontrakan,{ Key? key , required this.userID}) : super(key: key);
+  var userID;
+  Kontrakan kontrakan;
 
   @override
   _DetailkontrakanpenyewaState createState() => _DetailkontrakanpenyewaState();
 }
 
 class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
+  var boolwishlist = true;
+  var kontrakanID;
+  var userID;
+
+  @override
+  void initState() {
+    super.initState();
+    userID = widget.userID;
+    kontrakanID = widget.kontrakan.id;
+    print("DetailKontrakan"+userID.toString()+kontrakanID.toString());
+    isWishlist(userID, kontrakanID);
+  }
+
+  Future<dynamic> isWishlist(int userID, int kontrakanID) async{
+    await WishlistService.isWishlist(userID, kontrakanID).then((value) {
+      setState(() {
+        if(value == "1"){
+          boolwishlist = true;
+          print("==1");
+          print(value);
+        }else{
+          boolwishlist = false;
+          print("!=1");
+          print(value);
+        }
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,13 +55,7 @@ class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
                   children: <Widget>[
                     new GestureDetector(
                       onTap: () {
-                        Navigator.pushAndRemoveUntil<dynamic>(
-                          context, 
-                          MaterialPageRoute<dynamic>(
-                            builder: (context) => Carikontrakanpenyewa()
-                          ), 
-                          (route) => false
-                        );
+                        Navigator.pop(context);
                       },
                       child: SizedBox(
                         height: 50,
@@ -56,9 +81,7 @@ class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(6),
                     child: Image(
-                      image: NetworkImage(
-                        "https://cf.bstatic.com/xdata/images/hotel/max1280x900/314234927.jpg?k=21291418450e2c1802e02864677b7cf811321797b1d36aaa55e1019133f82698&o=&hp=1"
-                      )
+                      image: NetworkImage("https://kontrakin.imtstack.com/storage/" + widget.kontrakan.image!)
                     )
                   )
                 ),
@@ -109,7 +132,7 @@ class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
                                   ),
                                   Spacer(),
                                   Text(
-                                    "Jawa Timur",
+                                    widget.kontrakan.province!,
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.bold,
@@ -131,7 +154,7 @@ class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
                                   ),
                                   Spacer(),
                                   Text(
-                                    "Surabaya",
+                                    widget.kontrakan.city!,
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.bold,
@@ -170,7 +193,7 @@ class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
                             ),
                             Spacer(),
                             Text(
-                              "Era Group",
+                              widget.kontrakan.lessorName!,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -189,7 +212,7 @@ class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
                             ),
                             Spacer(),
                             Text(
-                              "1 Tahun",
+                              widget.kontrakan.minimumRent.toString(),
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -201,14 +224,13 @@ class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
                         Row(
                           children: <Widget>[
                             Text(
-                              "Deposit",
+                              "Biaya Sewa",
                               style: TextStyle(
                                 fontSize: 15
                               )
                             ),
                             Spacer(),
-                            Text(
-                              "Rp 500.000,-",
+                            Text(CurrencyFormat.convertToIdr(widget.kontrakan.pricePerYear, 2),
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -217,6 +239,7 @@ class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
                             ),
                           ]
                         ),
+                        
                       ]
                     )
                   )
@@ -254,7 +277,7 @@ class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
                         Row(
                           children: [
                             Text(
-                              "1 jam dari Bandara Juanda menggunakan tol.\nFasilitas Tambahan :\n\u2022 Gratis Nasi\n\u2022 Listrik 150kWh/bulan\n\u2022 24 jam CCTV aktif",
+                              widget.kontrakan.description!,
                               style: TextStyle(
                                 height: 1.3
                               )
@@ -302,7 +325,7 @@ class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
                             Container(
                               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                               child: Text(
-                                "Michael Chandra",
+                                widget.kontrakan.lessorName!,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 24
@@ -329,7 +352,7 @@ class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
                                         text: "Nomor Telepon "
                                       ),
                                       TextSpan(
-                                        text: "086172838213",
+                                        text: widget.kontrakan.phone!,
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold
                                         )
@@ -352,6 +375,7 @@ class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
                               child: ElevatedButton(
                                 onPressed: () {
                                   print("HUBUNGI PEMILIK KONTRAKAN TAPPED");
+                                  _launchURL(widget.kontrakan.phone!);
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Color(0xff0042C1),
@@ -382,11 +406,21 @@ class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
                   height: 50,
                   child: ElevatedButton.icon(
                     onPressed: () {
+                      
+                      setState(() {
+                        if(boolwishlist){
+                          boolwishlist = false;
+                          _deletewishlistfromkontrakan(widget.userID!, widget.kontrakan.id!);
+                        }else{
+                          boolwishlist = true;
+                          _setWishlist(widget.kontrakan.id!, widget.userID!);
+                        }
+                      });
                       print("MASUKKAN KE WISHLIST TAPPED");
                     },
-                    icon: Icon(Icons.favorite_outline),
+                    icon: boolwishlist ? Icon(Icons.favorite_sharp) : Icon(Icons.favorite_outline),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xff8000FF),
+                      backgroundColor: boolwishlist ? Color(0xff7C7C7C) : Color(0xff8000FF),
                       elevation: 0,
                       textStyle: TextStyle(
                         fontSize: 14,
@@ -396,7 +430,9 @@ class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
                         borderRadius: BorderRadius.circular(6)
                       )
                     ),
-                    label: Text("MASUKKAN KE WISHLIST")
+                    label: boolwishlist
+                                            ? Text("HAPUS DARI WISHLIST")
+                                            : Text("MASUKKAN KE WISHLIST"),
                   )
                 ),
                 SizedBox(height: 16),
@@ -427,5 +463,23 @@ class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
         )
       )
     );
+  }
+
+  _setWishlist(int kontrakanID, int userID) async{
+    print("setwishlist"+kontrakanID.toString());
+    WishlistService.setWishlist(kontrakanID, userID);
+  }
+  _deletewishlistfromkontrakan(int userID, int kontrakanID) async{
+    print("deletewishlist"+kontrakanID.toString());
+    WishlistService.deletefromkontrakan(userID, kontrakanID);
+  }
+
+  _launchURL(String nomorwa) async {
+    var url = 'https://wa.me/62'+nomorwa;
+      if (await launch(url)) {
+      await canLaunch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
   }
 }

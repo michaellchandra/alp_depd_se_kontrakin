@@ -1,13 +1,15 @@
 import 'package:alp_depd_se_kontrakin/models/kontrakan.dart';
 import 'package:alp_depd_se_kontrakin/views/const/currencyformat.dart';
+import 'package:alp_depd_se_kontrakin/views/pages/pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
 class KontrakanCard extends StatefulWidget {
   Kontrakan? kontrakan;
+  var userID;
   KontrakanCard({super.key,
-      required this.kontrakan});
+      required this.kontrakan, this.userID});
 
   @override
   State<KontrakanCard> createState() => _KontrakanCardState();
@@ -19,7 +21,9 @@ class _KontrakanCardState extends State<KontrakanCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (() {
-        print("Tapped");
+        print("Card Wishlist Tapped");
+        Navigator.push(context,
+          MaterialPageRoute(builder: (context) => Detailkontrakanpenyewa(widget.kontrakan!, userID: widget.userID,)));
         // Navigator.push(context, ) tolong arahin ke detail kontrakan untuk penyewa.
       }),
       child: Card(

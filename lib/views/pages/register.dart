@@ -1,7 +1,8 @@
 part of 'pages.dart';
 
 class Register extends StatefulWidget {
-  const Register({Key? key}) : super(key: key);
+  Register({Key? key, required this.role}) : super(key: key);
+  var role;
 
   @override
   _RegisterState createState() => _RegisterState();
@@ -49,12 +50,7 @@ class _RegisterState extends State<Register> {
                                   color: Colors.transparent,
                                   child: InkWell(
                                     onTap: () {
-                                      Navigator.pushAndRemoveUntil<dynamic>(
-                                          context,
-                                          MaterialPageRoute<dynamic>(
-                                              builder: (context) =>
-                                                  Pilihrole()),
-                                          (route) => false);
+                                      Navigator.pop(context);
                                     },
                                     child: SizedBox(
                                       width: 100,
@@ -188,7 +184,7 @@ class _RegisterState extends State<Register> {
                                 onPressed: () {
                                   if (_formKey.currentState?.validate() ??
                                       true) {
-                                    _register();
+                                    _register(widget.role);
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -243,11 +239,11 @@ class _RegisterState extends State<Register> {
         ));
   }
 
-  void _register() async {
+  void _register(String role) async {
     setState(() {
       _isLoading = true;
     });
-    var data = {'name': name, 'email': email, 'phone': phone, 'password': password, 'role': 'owner'};
+    var data = {'name': name, 'email': email, 'phone': phone, 'password': password, 'role': role};
 
     var res = await Network().auth(data, '/register');
     var body = json.decode(res.body);

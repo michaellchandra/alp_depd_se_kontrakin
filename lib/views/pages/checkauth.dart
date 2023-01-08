@@ -31,6 +31,7 @@ class _CheckAuthState extends State<CheckAuth> {
           isAuth = true;
           if (role.compareTo('"owner"') == 0) {
             isPenyewa = false;
+            print("ispenyewafalse");
           }
           var user = jsonDecode(localStorage.getString('user') ?? '');
           userId = user['id'];
@@ -43,7 +44,7 @@ class _CheckAuthState extends State<CheckAuth> {
   Widget build(BuildContext context) {
     Widget child;
     if (isAuth && isPenyewa) {
-      child = Botnav(
+      child = Botnavpenyewa(
         index: 0,
         userID: userId,
       );

@@ -49,11 +49,7 @@ class _LoginState extends State<Login> {
                                 color: Colors.transparent,
                                 child: InkWell(
                                   onTap: () {
-                                    Navigator.pushAndRemoveUntil<dynamic>(
-                                        context,
-                                        MaterialPageRoute<dynamic>(
-                                            builder: (context) => Pilihrole()),
-                                        (route) => false);
+                                    Navigator.pop(context);
                                   },
                                   child: SizedBox(
                                     width: 100,
@@ -170,7 +166,7 @@ class _LoginState extends State<Login> {
                             Navigator.pushAndRemoveUntil<dynamic>(
                                 context,
                                 MaterialPageRoute<dynamic>(
-                                    builder: (context) => Register()),
+                                    builder: (context) => Pilihrole()),
                                 (route) => false);
                           },
                           child: RichText(

@@ -7,6 +7,7 @@ import 'package:alp_depd_se_kontrakin/models/city.dart';
 import 'package:alp_depd_se_kontrakin/models/transaksi.dart';
 import 'package:alp_depd_se_kontrakin/models/transaksidetails.dart';
 import 'package:alp_depd_se_kontrakin/views/const/const.dart';
+import 'package:alp_depd_se_kontrakin/views/const/currencyformat.dart';
 import 'package:alp_depd_se_kontrakin/views/network/kontrakanservice.dart';
 import 'package:alp_depd_se_kontrakin/views/pages/checkauth.dart';
 import 'package:alp_depd_se_kontrakin/views/widgets/Kontrakan_card.dart';
@@ -22,6 +23,7 @@ import 'dart:async';
 
 import '../network/transaksiservice.dart';
 import '../network/cityservice.dart';
+import '../network/wishlistservice.dart';
 import '../widgets/uiloading.dart';
 
 part 'login.dart';
@@ -48,6 +50,7 @@ part '../penyewa/detailkontrakanpenyewa.dart';
 part '../penyewa/carikontrakanpenyewa.dart';
 part '../penyewa/detailwishlistkontrakan.dart';
 part '../network/api.dart';
+part '../penyewa/botnavpenyewa.dart';
 
 class BluePainter extends CustomPainter {
   @override
