@@ -88,6 +88,24 @@ class TransaksiService{
     return null;
   }
 
+  static void storeTransaksi(int lessorID, int lesseeID, String startDate, int rentDuration, int kontrakanID) async {
+    final response = await http.post(
+      Uri.https(Const.baseUrl, '/api/transaction/store'),
+      headers: <String,String> {
+        "Content-Type" : "application/json; charset=UTF-8",
+      },
+      body: jsonEncode(<String, dynamic>{
+        'lessorID' : lessorID,
+        'lesseeID' : lesseeID,
+        'startDate' : startDate,
+        'rentDuration' : rentDuration,
+        'kontrakanID' : kontrakanID
+      })
+    );
+    
+    return null;
+  }
+
   static Future<List<Transaksi>> getLesseeOnGoing(int lesseeID) async{
     var response = await http.post(
       Uri.https(Const.baseUrl, '/api/transaction/lesseeongoing'),

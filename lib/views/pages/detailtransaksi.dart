@@ -13,7 +13,7 @@ class _DetailtransaksiState extends State<Detailtransaksi> {
 
   dynamic transaksi;
   var lolid;
-  var remainingDate = "", id = 0, startDate = "", rentDuration = 0, lesseeName = "", lessorName = "", image = "";
+  var remainingDate = "", id = 0, startDate = "", rentDuration = 0, lesseeName = "", lessorName = "", image = "Image/7H53VFX8uvdYCrg8RIE0WxsBaXOiOzpa8qLql49T.jpg";
 
   @override
   void initState() {

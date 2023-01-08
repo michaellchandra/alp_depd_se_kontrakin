@@ -441,6 +441,13 @@ class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
+                      Navigator.pushAndRemoveUntil<dynamic>(
+                        context,
+                        MaterialPageRoute<dynamic>(
+                          builder: (context) => Formkontrak(kontrakan: widget.kontrakan, userID: userID,)
+                        ),
+                        (route) => false
+                      );
                       print("KONTRAK SEKARANG TAPPED");
                     },
                     style: ElevatedButton.styleFrom(

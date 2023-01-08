@@ -1,13 +1,13 @@
-part of 'pages.dart';
+part of '../pages/pages.dart';
 
-class Editprofile extends StatefulWidget {
-  const Editprofile({ Key? key }) : super(key: key);
+class Editprofilepenyewa extends StatefulWidget {
+  const Editprofilepenyewa({ Key? key }) : super(key: key);
 
   @override
-  _EditprofileState createState() => _EditprofileState();
+  _EditprofilepenyewaState createState() => _EditprofilepenyewaState();
 }
 
-class _EditprofileState extends State<Editprofile> {
+class _EditprofilepenyewaState extends State<Editprofilepenyewa> {
 
   var userId = 0;
 
@@ -54,7 +54,7 @@ class _EditprofileState extends State<Editprofile> {
                       Navigator.push<dynamic>(
                         context,
                         MaterialPageRoute<dynamic>(
-                          builder: (context) => Botnav(index: 2, userID: userId)),
+                          builder: (context) => Botnavpenyewa(index: 2, userID: userId)),
                       );
                     },
                     child: SizedBox(
@@ -192,10 +192,12 @@ class _EditprofileState extends State<Editprofile> {
   }
   void _editProfile() async {
     Network.editProfile(userId, nameController.text.toString(), emailController.text.toString(), int.parse(phoneNumberController.text));
-    Navigator.push<dynamic>(
+    Navigator.pushAndRemoveUntil<dynamic>(
       context,
       MaterialPageRoute<dynamic>(
-        builder: (context) => Botnav(index: 2, userID: userId)),
+        builder: (context) => Botnav(index: 2, userID: userId)
+      ),
+      (route) => false
     );
   }
 }

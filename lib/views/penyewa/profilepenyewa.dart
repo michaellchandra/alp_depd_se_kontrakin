@@ -9,6 +9,28 @@ class Profilepenyewa extends StatefulWidget {
 }
 
 class _ProfilepenyewaState extends State<Profilepenyewa> {
+  String name = '';
+
+  var id;
+
+  @override
+  void initState() {
+    super.initState();
+    id = widget.userID;
+    _loadUserData();
+  }
+
+  _loadUserData() async {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      var user = jsonDecode(localStorage.getString('user')!);
+
+      if (user != null) {
+        setState(() {
+          name = user['name'];
+        });
+      }
+    }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,16 +62,24 @@ class _ProfilepenyewaState extends State<Profilepenyewa> {
                       SizedBox(height: 20),
                       Row(
                         children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.grey,
-                            radius: 50,
+                          Container(
+                            width: 100,
+                          height: 100,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              color: Colors.grey.shade300
+                            ),
+                            child: Icon(
+                              Icons.person,
+                              size: 60
+                            )
                           ),
                           SizedBox(width: 24),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Selyandaru R.",
+                                "${name}",
                                 style: TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
@@ -57,7 +87,14 @@ class _ProfilepenyewaState extends State<Profilepenyewa> {
                                 textAlign: TextAlign.left,
                               ),
                               ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushAndRemoveUntil<dynamic>(
+                                      context,
+                                      MaterialPageRoute<dynamic>(
+                                          builder: (context) => Editprofilepenyewa()),
+                                      (route) => false
+                                    );
+                                  },
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.white,
                                       side: const BorderSide(
@@ -71,7 +108,7 @@ class _ProfilepenyewaState extends State<Profilepenyewa> {
                           )
                         ],
                       ),
-                      SizedBox(height: 40),
+                      SizedBox(height: 25),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -98,10 +135,12 @@ class _ProfilepenyewaState extends State<Profilepenyewa> {
                           splashColor: Colors.blue.withAlpha(30),
                           onTap: () {
                             Navigator.pushAndRemoveUntil<dynamic>(
-                                context,
-                                MaterialPageRoute<dynamic>(
-                                    builder: (context) => Wishlistkontrakan()),
-                                (route) => false);
+                              context,
+                              MaterialPageRoute<dynamic>(
+                                builder: (context) => Wishlistkontrakan(userID: widget.userID,)
+                              ),
+                              (route) => false
+                            );
                           },
                           child: SizedBox(
                             width: 400,
@@ -178,11 +217,7 @@ class _ProfilepenyewaState extends State<Profilepenyewa> {
                         child: InkWell(
                           splashColor: Colors.blue.withAlpha(30),
                           onTap: () {
-                            Navigator.pushAndRemoveUntil<dynamic>(
-                                context,
-                                MaterialPageRoute<dynamic>(
-                                    builder: (context) => Login()),
-                                (route) => false);
+                            _launchURL();
                           },
                           child: SizedBox(
                             width: 400,
@@ -227,11 +262,7 @@ class _ProfilepenyewaState extends State<Profilepenyewa> {
                         child: InkWell(
                           splashColor: Colors.blue.withAlpha(30),
                           onTap: () {
-                            Navigator.pushAndRemoveUntil<dynamic>(
-                                context,
-                                MaterialPageRoute<dynamic>(
-                                    builder: (context) => Login()),
-                                (route) => false);
+                            logout();
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -259,5 +290,25 @@ class _ProfilepenyewaState extends State<Profilepenyewa> {
                   ),
                 )))
     );
+  }
+  void logout() async {
+    var res = await Network().getData('/logout');
+    var body = json.decode(res.body);
+    if (body['success']) {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      localStorage.remove('user');
+      localStorage.remove('token');
+      localStorage.remove('role');
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Login()));
+    }
+  }
+  _launchURL() async {
+    var url = 'https://wa.me/6285294295003';
+      if (await launch(url)) {
+        await canLaunch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
   }
 }

@@ -1,38 +1,18 @@
-part of 'pages.dart';
+part of '../pages/pages.dart';
 
-class Editprofile extends StatefulWidget {
-  const Editprofile({ Key? key }) : super(key: key);
+class Formkontrak extends StatefulWidget {
+  Kontrakan? kontrakan;
+  var userID;
+  Formkontrak({super.key, required this.kontrakan, this.userID});
 
   @override
-  _EditprofileState createState() => _EditprofileState();
+  _FormkontrakState createState() => _FormkontrakState();
 }
 
-class _EditprofileState extends State<Editprofile> {
+class _FormkontrakState extends State<Formkontrak> {
 
-  var userId = 0;
-
-  final _keyState = GlobalKey<FormState>();
-
-  TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
-
-  void getUser() async {
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    var user = jsonDecode(localStorage.getString('user')!);
-
-    userId = user['id'];
-
-    nameController.text = user['name'].toString();
-    emailController.text  = user['email'].toString();
-    phoneNumberController.text = user['phone'].toString();
-  }
-
-  @override
-  void initState(){
-    super.initState();
-    getUser();
-  }
+  TextEditingController minimumRentController = TextEditingController();
+  TextEditingController startDateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,11 +31,7 @@ class _EditprofileState extends State<Editprofile> {
                 children: <Widget>[
                   GestureDetector(
                     onTap: (){
-                      Navigator.push<dynamic>(
-                        context,
-                        MaterialPageRoute<dynamic>(
-                          builder: (context) => Botnav(index: 2, userID: userId)),
-                      );
+                      Navigator.pop(context);
                     },
                     child: SizedBox(
                       height: 30,
@@ -65,7 +41,7 @@ class _EditprofileState extends State<Editprofile> {
                   Spacer(),
                   Container(
                     child: Text(
-                      "Edit Profile",
+                      "Form Kontrak",
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
@@ -86,11 +62,11 @@ class _EditprofileState extends State<Editprofile> {
                   )]
                 ),
                 child: TextFormField(
-                  controller: nameController,
+                  controller: minimumRentController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: ((value) {
                     if (value!.isEmpty) {
-                      return 'Please enter your name';
+                      return 'Please enter minimum rent (year)';
                     }
                     return null;
                   }),
@@ -99,7 +75,7 @@ class _EditprofileState extends State<Editprofile> {
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.black)
                     ),
-                    labelText: "Name",
+                    labelText: "Minimum Rent (Year)",
                   ),
                 ),
               ),
@@ -113,11 +89,11 @@ class _EditprofileState extends State<Editprofile> {
                   )]
                 ),
                 child: TextFormField(
-                  controller: emailController,
+                  controller: startDateController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: ((value) {
                     if (value!.isEmpty) {
-                      return 'Please enter your email address';
+                      return 'Please enter your start date (yyyy-mm-dd)';
                     }
                     return null;
                   }),
@@ -126,37 +102,7 @@ class _EditprofileState extends State<Editprofile> {
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.black)
                     ),
-                    labelText: "Email",
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              Container(
-                decoration: BoxDecoration(
-                  boxShadow: [BoxShadow(
-                    color: Colors.white,
-                    blurRadius: 2.0,
-                    spreadRadius: 0.4
-                  )]
-                ),
-                child: TextFormField(
-                  controller: phoneNumberController,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: ((value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your phone number';
-                    }
-                    if (value.contains(new RegExp(r'[a-z]'))) {
-                      return 'Please input valid phone number';
-                    }
-                    return null;
-                  }),
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black)
-                    ),
-                    labelText: "Phone Number",
+                    labelText: "Start Date (yyyy-mm-dd)",
                   ),
                 ),
               ),
@@ -166,9 +112,7 @@ class _EditprofileState extends State<Editprofile> {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    if (_keyState.currentState?.validate() ?? true) {
-                      _editProfile();
-                    }
+                    _setTransaksi(int.parse(widget.kontrakan!.userId.toString()), widget.userID, startDateController.text, int.parse(minimumRentController.text), int.parse(widget.kontrakan!.id.toString()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xff0042C1),
@@ -181,7 +125,7 @@ class _EditprofileState extends State<Editprofile> {
                         borderRadius: BorderRadius.circular(6)
                       )
                   ),
-                  child: Text("Simpan Perubahan")
+                  child: Text("Kontrak")
                 ),
               ),
             ]
@@ -190,12 +134,12 @@ class _EditprofileState extends State<Editprofile> {
       )
     );
   }
-  void _editProfile() async {
-    Network.editProfile(userId, nameController.text.toString(), emailController.text.toString(), int.parse(phoneNumberController.text));
+  void _setTransaksi(int lessorID, int lesseeID, String startDate, int rentDuration, int kontrakanID) async {
+    TransaksiService.storeTransaksi(lessorID, lesseeID, startDate, rentDuration, kontrakanID);
     Navigator.push<dynamic>(
       context,
       MaterialPageRoute<dynamic>(
-        builder: (context) => Botnav(index: 2, userID: userId)),
+        builder: (context) => Botnavpenyewa(index: 1, userID: lesseeID)),
     );
   }
 }

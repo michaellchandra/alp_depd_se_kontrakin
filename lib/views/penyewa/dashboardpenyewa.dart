@@ -9,6 +9,27 @@ class Dashboardpenyewa extends StatefulWidget {
 }
 
 class _DashboardpenyewaState extends State<Dashboardpenyewa> {
+  String name = '';
+  var userID;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+    userID = widget.userID;
+  }
+
+  _loadUserData() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var user = jsonDecode(localStorage.getString('user')!);
+
+    if (user != null) {
+      setState(() {
+        name = user['name'];
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +69,7 @@ class _DashboardpenyewaState extends State<Dashboardpenyewa> {
                             Container(
                               padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
                               child: Text(
-                                'Penyewa',
+                                '${name}',
                                 style: TextStyle(
                                   fontSize: 28,
                                   fontWeight: FontWeight.bold,
@@ -58,7 +79,7 @@ class _DashboardpenyewaState extends State<Dashboardpenyewa> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 26),
+                        SizedBox(height: 16),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -276,11 +297,7 @@ class _DashboardpenyewaState extends State<Dashboardpenyewa> {
                           child: InkWell(
                             splashColor: Colors.blue.withAlpha(30),
                             onTap: () {
-                              Navigator.pushAndRemoveUntil<dynamic>(
-                                  context,
-                                  MaterialPageRoute<dynamic>(
-                                      builder: (context) => Login()),
-                                  (route) => false);
+                              _launchURL();
                             },
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
@@ -328,15 +345,10 @@ class _DashboardpenyewaState extends State<Dashboardpenyewa> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           elevation: 8,
-                          color: Color(0xff0042C1),
                           child: InkWell(
                             splashColor: Colors.blue.withAlpha(30),
                             onTap: () {
-                              Navigator.pushAndRemoveUntil<dynamic>(
-                                  context,
-                                  MaterialPageRoute<dynamic>(
-                                      builder: (context) => Login()),
-                                  (route) => false);
+                              _launchURL();
                             },
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
@@ -346,7 +358,7 @@ class _DashboardpenyewaState extends State<Dashboardpenyewa> {
                                 child: Row(
                                   children: <Widget>[
                                     SizedBox(width: 16),
-                                    Icon(Icons.share_outlined, size: 50, color: Color(0xffF9F9F9)),
+                                    Icon(Icons.attach_money, size: 50),
                                     SizedBox(width: 12),
                                     Expanded(
                                       child: RichText(
@@ -357,22 +369,17 @@ class _DashboardpenyewaState extends State<Dashboardpenyewa> {
                                                 fontWeight: FontWeight.bold),
                                             children: <TextSpan>[
                                               new TextSpan(
-                                                  text: "Undang Teman\n",
+                                                  text: "Mau Pasang Iklan?\n",
                                                   style:
-                                                      TextStyle(
-                                                        height: 1.3,
-                                                        color: Color(0xffF9F9F9)
-                                                      )
-                                              ),
+                                                      TextStyle(height: 1.3)),
                                               new TextSpan(
                                                   text:
-                                                      "Dapatkan voucher diskon biaya sewa kontrakan dengan mengundang teman menggunakan KONTRAKIN\n",
+                                                      "Ingin kontrakan Anda lebih diliat orang? Yuk pasang iklan sekarang!",
                                                   style: TextStyle(
-                                                      color: Color(0xffF9F9F9),
+                                                      color: Colors.black,
                                                       fontSize: 14,
                                                       fontWeight:
-                                                          FontWeight.normal)
-                                              ),
+                                                          FontWeight.normal)),
                                             ]),
                                       ),
                                     ),
@@ -383,26 +390,6 @@ class _DashboardpenyewaState extends State<Dashboardpenyewa> {
                           ),
                         ),
 
-                        //LOGOUT SEMENTARA HAPUS AJA KALAU PERLU
-                        SizedBox(
-                          width: double.infinity,
-                          height: 30,
-                          child: ElevatedButton(
-                              onPressed: () {
-
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xff0042C1),
-                                  elevation: 0,
-                                  textStyle: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
-                                  padding: EdgeInsets.fromLTRB(24, 10, 24, 10),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(6))),
-                              child: Text("LOGOUT SEMENTARA")),
-                        ),
-
                         //SAMPAI SINI
                       ],
                     ),
@@ -410,5 +397,13 @@ class _DashboardpenyewaState extends State<Dashboardpenyewa> {
             ],
           )),
     );
+  }
+  _launchURL() async {
+    var url = 'https://wa.me/6285294295003';
+      if (await launch(url)) {
+        await canLaunch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
   }
 }

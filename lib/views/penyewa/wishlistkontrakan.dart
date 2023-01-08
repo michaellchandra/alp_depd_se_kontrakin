@@ -47,7 +47,7 @@ class _WishlistkontrakanState extends State<Wishlistkontrakan> {
                         Navigator.pushAndRemoveUntil<dynamic>(
                           context, 
                           MaterialPageRoute<dynamic>(
-                            builder: (context) => Profilepenyewa(userID: widget.userID,)
+                            builder: (context) => Botnavpenyewa(index: 2, userID: widget.userID,)
                           ), 
                           (route) => false
                         );

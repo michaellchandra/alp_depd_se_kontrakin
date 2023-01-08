@@ -375,27 +375,6 @@ class _DetailcarikontrakanState extends State<Detailcarikontrakan> {
                   )
                 ),
                 SizedBox(height: 30),
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      print("KONTRAK SEKARANG TAPPED");
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xffFF4C00),
-                      elevation: 0,
-                      textStyle: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6)
-                      )
-                    ),
-                    child: Text("KONTRAK SEKARANG")
-                  )
-                ),
               ]
             ),
           )

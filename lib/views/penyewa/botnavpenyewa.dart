@@ -25,7 +25,7 @@ class _BotnavpenyewaState extends State<Botnavpenyewa> {
   late final tabs = [
       Dashboardpenyewa(userID: userID), 
       Carikontrakanpenyewa(userID: userID),
-      Profile(id: userID,),
+      Profilepenyewa(userID: userID,),
   ];
 
   @override

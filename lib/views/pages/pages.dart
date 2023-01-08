@@ -53,6 +53,8 @@ part '../penyewa/carikontrakanpenyewa.dart';
 part '../penyewa/detailwishlistkontrakan.dart';
 part '../network/api.dart';
 part '../penyewa/botnavpenyewa.dart';
+part '../penyewa/formkontrak.dart';
+part '../penyewa/editprofilepenyewa.dart';
 
 class BluePainter extends CustomPainter {
   @override

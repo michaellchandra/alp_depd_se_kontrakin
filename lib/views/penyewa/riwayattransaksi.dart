@@ -57,7 +57,7 @@ class _RiwayattransaksiState extends State<Riwayattransaksi> {
                         Navigator.pushAndRemoveUntil<dynamic>(
                           context, 
                           MaterialPageRoute<dynamic>(
-                            builder: (context) => Profilepenyewa(userID: widget.userID,)
+                            builder: (context) => Botnavpenyewa(index: 2, userID: widget.userID,)
                           ), 
                           (route) => false
                         );
@@ -111,12 +111,11 @@ class _RiwayattransaksiState extends State<Riwayattransaksi> {
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
                     onTap: () {
-                      Navigator.pushAndRemoveUntil<dynamic>(
+                      Navigator.push(
                         context,
                         MaterialPageRoute<dynamic>(
                           builder: (context) => Detailtransaksipenyewa(listOngoing[index], userID: widget.userID)
                         ),
-                        (route) => false
                       );
                     },
                     child: SizedBox(
