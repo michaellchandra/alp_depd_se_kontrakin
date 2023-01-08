@@ -61,9 +61,17 @@ class _ProfileState extends State<Profile> {
                     SizedBox(height: 20),
                     Row(
                       children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.grey.shade300,
-                          radius: 50,
+                        Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: Colors.grey.shade300
+                          ),
+                          child: Icon(
+                            Icons.person,
+                            size: 60
+                          )
                         ),
                         SizedBox(width: 24),
                         Column(
