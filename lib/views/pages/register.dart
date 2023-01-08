@@ -203,11 +203,10 @@ class _RegisterState extends State<Register> {
                           SizedBox(height: 20),
                           new GestureDetector(
                             onTap: () {
-                              Navigator.pushAndRemoveUntil<dynamic>(
+                              Navigator.push(
                                   context,
                                   MaterialPageRoute<dynamic>(
-                                      builder: (context) => Login()),
-                                  (route) => false);
+                                      builder: (context) => Login()));
                             },
                             child: RichText(
                               text: new TextSpan(

@@ -61,11 +61,10 @@ class _PilihroleState extends State<Pilihrole> {
                           child: InkWell(
                             splashColor: Colors.blue.withAlpha(30),
                             onTap: () {
-                              Navigator.pushAndRemoveUntil<dynamic>(
+                              Navigator.push(
                                   context,
                                   MaterialPageRoute<dynamic>(
-                                      builder: (context) => Register(role: "owner")),
-                                  (route) => false);
+                                      builder: (context) => Register(role: "owner")),);
                             },
                             child: SizedBox(
                               width: 400,
@@ -111,11 +110,10 @@ class _PilihroleState extends State<Pilihrole> {
                           child: InkWell(
                             splashColor: Colors.blue.withAlpha(30),
                             onTap: () {
-                              Navigator.pushAndRemoveUntil<dynamic>(
+                              Navigator.push(
                                   context,
                                   MaterialPageRoute<dynamic>(
-                                      builder: (context) => Register(role: "notowner")),
-                                  (route) => false);
+                                      builder: (context) => Register(role: "notowner")),);
                             },
                             child: SizedBox(
                               width: 400,
