@@ -182,11 +182,7 @@ class _ProfileState extends State<Profile> {
                       child: InkWell(
                         splashColor: Colors.blue.withAlpha(30),
                         onTap: () {
-                          Navigator.pushAndRemoveUntil<dynamic>(
-                              context,
-                              MaterialPageRoute<dynamic>(
-                                  builder: (context) => Login()),
-                              (route) => false);
+                          _launchURL();
                         },
                         child: SizedBox(
                           width: 400,
@@ -269,5 +265,13 @@ class _ProfileState extends State<Profile> {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => Login()));
     }
+  }
+  _launchURL() async {
+    var url = 'https://wa.me/6285294295003';
+      if (await launch(url)) {
+        await canLaunch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
   }
 }

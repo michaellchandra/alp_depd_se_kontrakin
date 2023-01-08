@@ -349,11 +349,7 @@ class _DashboardState extends State<Dashboard> {
                           child: InkWell(
                             splashColor: Colors.blue.withAlpha(30),
                             onTap: () {
-                              Navigator.pushAndRemoveUntil<dynamic>(
-                                  context,
-                                  MaterialPageRoute<dynamic>(
-                                      builder: (context) => Login()),
-                                  (route) => false);
+                              _launchURL();
                             },
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
@@ -389,6 +385,7 @@ class _DashboardState extends State<Dashboard> {
                                             ]),
                                       ),
                                     ),
+                                    SizedBox(width: 8)
                                   ],
                                 ),
                               ),
@@ -404,11 +401,7 @@ class _DashboardState extends State<Dashboard> {
                           child: InkWell(
                             splashColor: Colors.blue.withAlpha(30),
                             onTap: () {
-                              Navigator.pushAndRemoveUntil<dynamic>(
-                                  context,
-                                  MaterialPageRoute<dynamic>(
-                                      builder: (context) => Login()),
-                                  (route) => false);
+                              _launchURL();
                             },
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
@@ -418,7 +411,7 @@ class _DashboardState extends State<Dashboard> {
                                 child: Row(
                                   children: <Widget>[
                                     SizedBox(width: 16),
-                                    Icon(Icons.share_outlined, size: 50),
+                                    Icon(Icons.attach_money, size: 50),
                                     SizedBox(width: 12),
                                     Expanded(
                                       child: RichText(
@@ -429,12 +422,12 @@ class _DashboardState extends State<Dashboard> {
                                                 fontWeight: FontWeight.bold),
                                             children: <TextSpan>[
                                               new TextSpan(
-                                                  text: "Undang Teman\n",
+                                                  text: "Mau Pasang Iklan?\n",
                                                   style:
                                                       TextStyle(height: 1.3)),
                                               new TextSpan(
                                                   text:
-                                                      "Dapatkan voucher diskon biaya sewa kontrakan dengan mengundang teman menggunakan KONTRAKIN\n",
+                                                      "Ingin kontrakan Anda lebih diliat orang? Yuk pasang iklan sekarang!",
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 14,
@@ -457,5 +450,13 @@ class _DashboardState extends State<Dashboard> {
             ],
           )),
     );
+  }
+  _launchURL() async {
+    var url = 'https://wa.me/6285294295003';
+      if (await launch(url)) {
+        await canLaunch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
   }
 }
