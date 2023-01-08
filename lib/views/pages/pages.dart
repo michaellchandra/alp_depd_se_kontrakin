@@ -37,6 +37,7 @@ part 'tambahkontrakan.dart';
 part 'editkontrakan.dart';
 part 'botnav.dart';
 part 'detailtransaksi.dart';
+part 'editprofile.dart';
 part '../penyewa/dashboardpenyewa.dart';
 part '../penyewa/profilepenyewa.dart';
 part '../penyewa/wishlistkontrakan.dart';

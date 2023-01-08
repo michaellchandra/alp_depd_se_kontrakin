@@ -124,7 +124,8 @@ class _CarikontrakanState extends State<Carikontrakan> {
                           hasMore: true);
                       }),
                     )
-                )
+                ),
+                SizedBox(height: 20),
               ],
             ),
           )

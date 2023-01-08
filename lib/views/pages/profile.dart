@@ -46,7 +46,7 @@ class _ProfileState extends State<Profile> {
                     Row(
                       children: [
                         CircleAvatar(
-                          backgroundColor: Colors.grey,
+                          backgroundColor: Colors.grey.shade300,
                           radius: 50,
                         ),
                         SizedBox(width: 24),
@@ -62,7 +62,14 @@ class _ProfileState extends State<Profile> {
                               textAlign: TextAlign.left,
                             ),
                             ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushAndRemoveUntil<dynamic>(
+                                    context,
+                                    MaterialPageRoute<dynamic>(
+                                        builder: (context) => Editprofile()),
+                                    (route) => false
+                                  );
+                                },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.white,
                                     side: const BorderSide(
@@ -71,7 +78,8 @@ class _ProfileState extends State<Profile> {
                                 child: Text(
                                   "Edit Profile",
                                   style: TextStyle(color: Color(0xff0042C1)),
-                                )),
+                                )
+                            ),
                           ],
                         )
                       ],
