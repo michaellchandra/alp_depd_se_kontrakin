@@ -6,6 +6,7 @@ import 'package:alp_depd_se_kontrakin/models/province.dart';
 import 'package:alp_depd_se_kontrakin/models/city.dart';
 import 'package:alp_depd_se_kontrakin/models/transaksi.dart';
 import 'package:alp_depd_se_kontrakin/models/transaksidetails.dart';
+import 'package:alp_depd_se_kontrakin/views/const/const.dart';
 import 'package:alp_depd_se_kontrakin/views/network/kontrakanservice.dart';
 import 'package:alp_depd_se_kontrakin/views/pages/checkauth.dart';
 import 'package:alp_depd_se_kontrakin/views/widgets/Kontrakan_card.dart';

@@ -9,6 +9,8 @@ class Editprofile extends StatefulWidget {
 
 class _EditprofileState extends State<Editprofile> {
 
+  var userId = 0;
+
   XFile? image;
 
   var selectedImage;
@@ -19,12 +21,23 @@ class _EditprofileState extends State<Editprofile> {
 
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+
+  void getUser() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var user = jsonDecode(localStorage.getString('user')!);
+
+    userId = user['id'];
+
+    nameController.text = user['name'].toString();
+    emailController.text  = user['email'].toString();
+    phoneNumberController.text = user['phone'].toString();
+  }
 
   @override
   void initState(){
     super.initState();
-    // nameController.text = widget.kontrakan.pricePerYear.toString();
-    // nameController.text  = widget.kontrakan.minimumRent.toString();
+    getUser();
   }
 
   Future getImage(ImageSource media) async {
@@ -114,13 +127,11 @@ class _EditprofileState extends State<Editprofile> {
                 children: <Widget>[
                   GestureDetector(
                     onTap: (){
-                      // Navigator.pushAndRemoveUntil<dynamic>(
-                      //   context,
-                      //   MaterialPageRoute<dynamic>(
-                      //     builder: (context) => Profile()),
-                      //   (route) =>false
-                      // );
-                      print("back pressed");
+                      Navigator.push<dynamic>(
+                        context,
+                        MaterialPageRoute<dynamic>(
+                          builder: (context) => Botnav(index: 2, userID: userId)),
+                      );
                     },
                     child: SizedBox(
                       height: 30,
@@ -142,63 +153,63 @@ class _EditprofileState extends State<Editprofile> {
                 ],
               ),
               SizedBox(height: 40),
-              image != null
-              ? Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image.file(
-                      File(image!.path),
-                      fit: BoxFit.cover,
-                      width: 140,
-                      height: 140,
-                    ),
-                  ),
-                )
-              : Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.grey.shade300,
-                      radius: 65
-                    ),
-                  ),
-                ),
-              SizedBox(height: 25),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    elevation: 8,
-                    child: SizedBox(
-                      width: 200,
-                      height: 45,
-                      child: Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: ElevatedButton.icon(
-                          onPressed: (){
-                            myAlert();
-                          },
-                          icon: Icon(Icons.file_upload_outlined, color: Colors.grey),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white
-                          ),
-                          label: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text("Upload Foto",
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                          )
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
+              // image != null
+              // ? Padding(
+              //     padding: EdgeInsets.symmetric(horizontal: 20),
+              //     child: ClipRRect(
+              //       borderRadius: BorderRadius.circular(100),
+              //       child: Image.file(
+              //         File(image!.path),
+              //         fit: BoxFit.cover,
+              //         width: 140,
+              //         height: 140,
+              //       ),
+              //     ),
+              //   )
+              // : Padding(
+              //     padding: EdgeInsets.symmetric(horizontal: 20),
+              //     child: ClipRRect(
+              //       borderRadius: BorderRadius.circular(100),
+              //       child: CircleAvatar(
+              //         backgroundColor: Colors.grey.shade300,
+              //         radius: 65
+              //       ),
+              //     ),
+              //   ),
+              // SizedBox(height: 25),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Card(
+              //       shape: RoundedRectangleBorder(
+              //         borderRadius: BorderRadius.circular(6),
+              //       ),
+              //       elevation: 8,
+              //       child: SizedBox(
+              //         width: 200,
+              //         height: 45,
+              //         child: Directionality(
+              //           textDirection: TextDirection.rtl,
+              //           child: ElevatedButton.icon(
+              //             onPressed: (){
+              //               myAlert();
+              //             },
+              //             icon: Icon(Icons.file_upload_outlined, color: Colors.grey),
+              //             style: ElevatedButton.styleFrom(
+              //               backgroundColor: Colors.white
+              //             ),
+              //             label: Align(
+              //               alignment: Alignment.centerLeft,
+              //               child: Text("Upload Foto",
+              //                 style: TextStyle(color: Colors.grey),
+              //               ),
+              //             )
+              //           ),
+              //         ),
+              //       ),
+              //     )
+              //   ],
+              // ),
               // CircleAvatar(
               //   backgroundColor: Colors.grey.shade300,
               //   radius: 65,
@@ -219,7 +230,7 @@ class _EditprofileState extends State<Editprofile> {
               //     ),
               //   )
               // ),
-              SizedBox(height: 25),
+              // SizedBox(height: 25),
               Container(
                 decoration: BoxDecoration(
                   boxShadow: [BoxShadow(
@@ -273,14 +284,44 @@ class _EditprofileState extends State<Editprofile> {
                   ),
                 ),
               ),
-              SizedBox(height: 60),
+              SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                  boxShadow: [BoxShadow(
+                    color: Colors.white,
+                    blurRadius: 2.0,
+                    spreadRadius: 0.4
+                  )]
+                ),
+                child: TextFormField(
+                  controller: phoneNumberController,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: ((value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter your phone number';
+                    }
+                    if (value.contains(new RegExp(r'[a-z]'))) {
+                      return 'Please input valid phone number';
+                    }
+                    return null;
+                  }),
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black)
+                    ),
+                    labelText: "Phone Number",
+                  ),
+                ),
+              ),
+              SizedBox(height: 70),
               SizedBox(
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
                     if (_keyState.currentState?.validate() ?? true) {
-                      print("simpan pressed");
+                      _editProfile();
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -301,6 +342,14 @@ class _EditprofileState extends State<Editprofile> {
           )
         )
       )
+    );
+  }
+  void _editProfile() async {
+    Network.editProfile(userId, nameController.text.toString(), emailController.text.toString(), int.parse(phoneNumberController.text));
+    Navigator.push<dynamic>(
+      context,
+      MaterialPageRoute<dynamic>(
+        builder: (context) => Botnav(index: 2, userID: userId)),
     );
   }
 }

@@ -142,7 +142,10 @@ class _RegisterState extends State<Register> {
                                       BorderRadius.all(Radius.circular(8))),
                             ),validator: (phoneValue) {
                                 if (phoneValue!.isEmpty) {
-                                  return 'Please enter your email';
+                                  return 'Please enter your phone number';
+                                }
+                                if (phoneValue.contains(new RegExp(r'[a-z]'))) {
+                                  return 'Please input valid phone number';
                                 }
                                 phone = phoneValue;
                                 return null;

@@ -30,4 +30,29 @@ class Network {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
       };
+
+  static void editProfile(int id, String name, String email, int phone) async {
+    final response = await http.post(
+      Uri.https(Const.baseUrl, '/api/v1/update'),
+      headers: <String,String> {
+        "Content-Type" : "application/json; charset=UTF-8",
+      },
+      body: jsonEncode(<String, dynamic>{
+        'userID' : id,
+        'name' : name,
+        'email' : email,
+        'phone' : phone
+      })
+    );
+
+    var jsonObject = json.decode(response.body);
+
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    localStorage.remove('user');
+    localStorage.setString('user', json.encode(jsonObject['data']));
+
+    print(jsonObject);
+    
+    return null;
+  }
 }

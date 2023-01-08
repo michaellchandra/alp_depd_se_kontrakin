@@ -9,12 +9,28 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  String name = '';
+
   var id;
+
   @override
   void initState() {
     super.initState();
     id = widget.id;
+    _loadUserData();
   }
+
+  _loadUserData() async {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      var user = jsonDecode(localStorage.getString('user')!);
+
+      if (user != null) {
+        setState(() {
+          name = user['name'];
+        });
+      }
+    }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +70,7 @@ class _ProfileState extends State<Profile> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Selyandaru R.",
+                              "${name}",
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -207,11 +223,7 @@ class _ProfileState extends State<Profile> {
                       child: InkWell(
                         splashColor: Colors.blue.withAlpha(30),
                         onTap: () {
-                          Navigator.pushAndRemoveUntil<dynamic>(
-                              context,
-                              MaterialPageRoute<dynamic>(
-                                  builder: (context) => Login()),
-                              (route) => false);
+                          logout();
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -237,5 +249,17 @@ class _ProfileState extends State<Profile> {
                     ),
                   ],
                 ))));
+  }
+  void logout() async {
+    var res = await Network().getData('/logout');
+    var body = json.decode(res.body);
+    if (body['success']) {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      localStorage.remove('user');
+      localStorage.remove('token');
+      localStorage.remove('role');
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Login()));
+    }
   }
 }
