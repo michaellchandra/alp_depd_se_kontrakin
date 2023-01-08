@@ -169,7 +169,9 @@ class _DashboardState extends State<Dashboard> {
                                                 image: DecorationImage(
                                                     image: NetworkImage(
                                                         "https://www.pngplay.com/wp-content/uploads/6/50-Off-Discount-Vector-Transparent-PNG.png"),
-                                                    fit: BoxFit.fitHeight)),
+                                                    fit: BoxFit.fitHeight
+                                                )
+                                            ),
                                           ),
                                           SizedBox(height: 6),
                                           Padding(

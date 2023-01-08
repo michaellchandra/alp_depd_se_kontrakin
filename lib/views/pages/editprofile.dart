@@ -15,6 +15,18 @@ class _EditprofileState extends State<Editprofile> {
 
   final ImagePicker picker = ImagePicker();
 
+  final _keyState = GlobalKey<FormState>();
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
+  @override
+  void initState(){
+    super.initState();
+    // nameController.text = widget.kontrakan.pricePerYear.toString();
+    // nameController.text  = widget.kontrakan.minimumRent.toString();
+  }
+
   Future getImage(ImageSource media) async {
     var img = await picker.pickImage(source: media);
 
@@ -84,9 +96,11 @@ class _EditprofileState extends State<Editprofile> {
           );
         });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: CustomPaint(
         painter: BluePainter5(),
         child: Container(
@@ -127,28 +141,85 @@ class _EditprofileState extends State<Editprofile> {
                   Spacer()
                 ],
               ),
-              SizedBox(height: 50),
-              CircleAvatar(
-                backgroundColor: Colors.grey.shade300,
-                radius: 65,
-                child: Container(
-                  width: 120,
-                  height: 120,
-                  padding: EdgeInsets.fromLTRB(80, 80, 0, 0),
-                  child: FloatingActionButton(
-                    backgroundColor: Color(0xff0042C1),
-                    onPressed: () {
-                      print("edit pressed");
-                      myAlert();
-                    },
-                    child: Icon(
-                      Icons.create_rounded,
-                      size: 18
+              SizedBox(height: 40),
+              image != null
+              ? Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.file(
+                      File(image!.path),
+                      fit: BoxFit.cover,
+                      width: 140,
+                      height: 140,
                     ),
                   ),
                 )
+              : Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.grey.shade300,
+                      radius: 65
+                    ),
+                  ),
+                ),
+              SizedBox(height: 25),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    elevation: 8,
+                    child: SizedBox(
+                      width: 200,
+                      height: 45,
+                      child: Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: ElevatedButton.icon(
+                          onPressed: (){
+                            myAlert();
+                          },
+                          icon: Icon(Icons.file_upload_outlined, color: Colors.grey),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white
+                          ),
+                          label: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text("Upload Foto",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          )
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
-              SizedBox(height: 50),
+              // CircleAvatar(
+              //   backgroundColor: Colors.grey.shade300,
+              //   radius: 65,
+              //   child: Container(
+              //     width: 120,
+              //     height: 120,
+              //     padding: EdgeInsets.fromLTRB(80, 80, 0, 0),
+              //     child: FloatingActionButton(
+              //       backgroundColor: Color(0xff0042C1),
+              //       onPressed: () {
+              //         print("edit pressed");
+              //         myAlert();
+              //       },
+              //       child: Icon(
+              //         Icons.create_rounded,
+              //         size: 18
+              //       ),
+              //     ),
+              //   )
+              // ),
+              SizedBox(height: 25),
               Container(
                 decoration: BoxDecoration(
                   boxShadow: [BoxShadow(
@@ -158,15 +229,14 @@ class _EditprofileState extends State<Editprofile> {
                   )]
                 ),
                 child: TextFormField(
-                  // controller: addressController,
+                  controller: nameController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  // validator: ((value) {
-                  //   if (value!.isEmpty) {
-                  //     return 'Please enter your address';
-                  //   }
-                  //   address = value;
-                  //   return null;
-                  // }),
+                  validator: ((value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter your name';
+                    }
+                    return null;
+                  }),
                   decoration: InputDecoration(
                     fillColor: Colors.white,
                     enabledBorder: UnderlineInputBorder(
@@ -176,7 +246,7 @@ class _EditprofileState extends State<Editprofile> {
                   ),
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 20),
               Container(
                 decoration: BoxDecoration(
                   boxShadow: [BoxShadow(
@@ -186,15 +256,14 @@ class _EditprofileState extends State<Editprofile> {
                   )]
                 ),
                 child: TextFormField(
-                  // controller: addressController,
+                  controller: emailController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  // validator: ((value) {
-                  //   if (value!.isEmpty) {
-                  //     return 'Please enter your address';
-                  //   }
-                  //   address = value;
-                  //   return null;
-                  // }),
+                  validator: ((value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter your email address';
+                    }
+                    return null;
+                  }),
                   decoration: InputDecoration(
                     fillColor: Colors.white,
                     enabledBorder: UnderlineInputBorder(
@@ -204,13 +273,15 @@ class _EditprofileState extends State<Editprofile> {
                   ),
                 ),
               ),
-              SizedBox(height: 70),
+              SizedBox(height: 60),
               SizedBox(
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    print("simpan preseed");
+                    if (_keyState.currentState?.validate() ?? true) {
+                      print("simpan pressed");
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xff0042C1),
