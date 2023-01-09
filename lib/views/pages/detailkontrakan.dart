@@ -205,8 +205,9 @@ class _DetailkontrakanState extends State<Detailkontrakan> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
+
                                   padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
-                                  child: Expanded(
+                                  child: Container(
                                     child: RichText(
                                       text: TextSpan(
                                         style: TextStyle(

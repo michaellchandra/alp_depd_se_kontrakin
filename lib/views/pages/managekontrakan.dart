@@ -90,7 +90,7 @@ class _ManagekontrakanState extends State<Managekontrakan> {
                     //     },
                     //   )
                     // )
-                    SizedBox(height: 24),
+                    SizedBox(height: 16),
                     Text(
                           "Active",
                           style: TextStyle(
