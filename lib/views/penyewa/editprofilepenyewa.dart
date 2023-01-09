@@ -195,7 +195,7 @@ class _EditprofilepenyewaState extends State<Editprofilepenyewa> {
     Navigator.pushAndRemoveUntil<dynamic>(
       context,
       MaterialPageRoute<dynamic>(
-        builder: (context) => Botnav(index: 2, userID: userId)
+        builder: (context) => Botnavpenyewa(index: 2, userID: userId)
       ),
       (route) => false
     );
