@@ -86,7 +86,7 @@ class _CarikontrakanpenyewaState extends State<Carikontrakanpenyewa> {
                 SizedBox(
                   width: 400,
                   height: 60,
-                  child: Expanded(
+                  child: Container(
                         child: Card(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(6)

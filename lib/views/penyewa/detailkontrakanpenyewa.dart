@@ -339,7 +339,7 @@ class _DetailkontrakanpenyewaState extends State<Detailkontrakanpenyewa> {
                           children: [
                             Container(
                               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                              child: Expanded(
+                              child: Container(
                                 child: RichText(
                                   text: TextSpan(
                                     style: TextStyle(

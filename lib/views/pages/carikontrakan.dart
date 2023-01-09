@@ -87,7 +87,7 @@ class _CarikontrakanState extends State<Carikontrakan> {
                 SizedBox(
                   width: 400,
                   height: 60,
-                  child: Expanded(
+                  child: Container(
                         child: Card(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(6)

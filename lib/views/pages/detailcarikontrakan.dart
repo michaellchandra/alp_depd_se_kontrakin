@@ -313,7 +313,7 @@ class _DetailcarikontrakanState extends State<Detailcarikontrakan> {
                           children: [
                             Container(
                               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                              child: Expanded(
+                              child: Container(
                                 child: RichText(
                                   text: TextSpan(
                                     style: TextStyle(

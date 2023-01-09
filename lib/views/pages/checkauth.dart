@@ -50,7 +50,7 @@ class _CheckAuthState extends State<CheckAuth> {
       );
     } else if (isAuth && isPenyewa == false) {
       child = Botnav(
-        index: 2,
+        index: 0,
         userID: userId,
       );
     } else {
